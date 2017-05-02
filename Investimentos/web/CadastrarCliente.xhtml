@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Simulador de Investimentos</title>
+    </h:head>
+    <h:body>
+        <h1>Crie seu Cadastro</h1>
+        <h:form>
+            <p:panelGrid columns="2" >
+                <h:outputLabel for='nome' value="Nome:"></h:outputLabel>
+                <h:inputText id="nome"></h:inputText>
+                <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
+                <p:inputMask id= 'cpf' mask='999.999.999-99'></p:inputMask>
+                <h:outputLabel for='email' value="E-mail:"></h:outputLabel>
+                <h:inputText id='email'></h:inputText>
+                <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
+                <p:calendar id='dataNasc' ></p:calendar>
+            </p:panelGrid> 
+                <p:commandButton value="Enviar" action="CadastrarClienteServlet"></p:commandButton>
+        </h:form>
+    </h:body>
+</html>
+
