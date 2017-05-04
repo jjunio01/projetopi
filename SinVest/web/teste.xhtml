@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:toolbar>
+                <p:toolbarGroup>                    
+                    <p:commandButton value="Salvar" action="#{clienteBean.salvar()}" update="@form"></p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:fieldset legend="Cadastro">
+                <p:panelGrid columns="2">                
+                    <h:outputLabel for="nome" value="Nome: "></h:outputLabel>
+                    <p:inputText id="nome" value="#{clienteBean.c.nome}"></p:inputText>
+                    <h:outputLabel for="cpf" value="CPF"></h:outputLabel>
+                    <p:inputMask id="cpf" mask="999.999.999-99" value="#{clienteBean.c.cpf}"></p:inputMask>
+                </p:panelGrid>
+                <p:dataTable value="#{clienteBean.clientes}" var="cli">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{cli.nome}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="CPF">
+                        <h:outputText value="#{cli.cpf}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </h:body>
+</html>
+
