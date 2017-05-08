@@ -18,33 +18,38 @@ import org.hibernate.cfg.Configuration;
  */
 public class ClienteDao implements DAOGenerico<Cliente> {
     
-     /*public SessionFactory abrirSession() {
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        return factory;
-    }*/
+    private static ClienteDao instance;
 
+
+    private ClienteDao() {
+    }
+    
+    public static ClienteDao getInstance() {
+
+        if (instance == null) {
+            instance = new ClienteDao();
+        }
+        return instance;
+    }
+    
     @Override
     public void create(Cliente t) {
-        Session session = DAOBancoMySql.getInstance().abrirSession().openSession();
-        session.beginTransaction();
+        Session session = DAOBancoMySql.iniciarTransacao();
         session.save(t);
-        session.getTransaction().commit();
-        session.close();
+        DAOBancoMySql.fecharTransacao(session);
     }
 
     @Override
     public void update(Cliente t) {
-       Session session = DAOBancoMySql.getInstance().abrirSession().openSession();
-        session.beginTransaction();
-        session.update(t);
-        session.getTransaction().commit();
-        session.close();
+        Session session = DAOBancoMySql.iniciarTransacao();
+        session.saveOrUpdate(t);
+        DAOBancoMySql.fecharTransacao(session);
+
     }
 
     @Override
     public Cliente read(String consul) {
-        Session session = DAOBancoMySql.getInstance().abrirSession().openSession();
+        Session session = DAOBancoMySql.iniciarTransacao();
         List<Cliente> clientes = readALL();
         Cliente cli = null;
 
@@ -54,18 +59,15 @@ public class ClienteDao implements DAOGenerico<Cliente> {
                 cli = clientes.get(i);
             }
         }
-        session.close();
+        DAOBancoMySql.fecharTransacao(session);
         return cli;
-
     }
 
     @Override
     public void delete(String consult) {
-        Session session = DAOBancoMySql.getInstance().abrirSession().openSession();
-        session.beginTransaction();
+        Session session = DAOBancoMySql.iniciarTransacao();
         List<Cliente> clientes = readALL();
         Cliente cli = null;
-
         for (int i = 0; i < clientes.size(); i++) {
 
             if (consult.equals(clientes.get(i).getCpf())) {
@@ -73,17 +75,15 @@ public class ClienteDao implements DAOGenerico<Cliente> {
             }
         }
         session.delete(cli);
-        session.getTransaction().commit();
-        session.close();
+        DAOBancoMySql.fecharTransacao(session);
     }
 
     @Override
     public List<Cliente> readALL() {
-        Session session = DAOBancoMySql.getInstance().abrirSession().openSession();
+        Session session = DAOBancoMySql.iniciarTransacao();
         Query consulta = session.createQuery("from Cliente");
         List<Cliente> clientes = consulta.list();
-        session.close();
+        DAOBancoMySql.fecharTransacao(session);
         return clientes;
     }
-
 }

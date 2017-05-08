@@ -35,21 +35,22 @@ public class DAOBancoMySql {
     }
 
     public SessionFactory abrirSession() {
+
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         return factory;
     }
 
-    /*public SessionFactory abrirSession() {
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        Session session = factory.openSession();
-        return factory;
-    }
-      public void create(G g){
-        Session session = abrirSession().openSession();
+    public static Session iniciarTransacao() {
+        Session session = getInstance().abrirSession().openSession();
         session.beginTransaction();
-        session.save(g);
+        return session;
+    }
+
+    public static Session fecharTransacao(Session session) {
         session.getTransaction().commit();
         session.close();
-    }*/
+        return session;
+    }
+
 }

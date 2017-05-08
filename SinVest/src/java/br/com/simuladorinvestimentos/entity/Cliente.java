@@ -1,5 +1,6 @@
 package br.com.simuladorinvestimentos.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,27 +10,36 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
-    @Column(length = 30)
+    private Integer id;
+    @Column(length = 40)
     private String nome;
-    @Column(length = 30)
+    @Column
     private String cpf;
-
-    /*@Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date dataNasc;
     @Column(length = 40)
-    private String email;*/
+    private String email;
 
-    public Cliente(String nome, String cpf) {
+    public Cliente(String nome, String cpf, Date dataNasc, String email) {
         this.nome = nome;
         this.cpf = cpf;
+        this.dataNasc = dataNasc;
+        this.email = email;
     }
 
     public Cliente() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -44,16 +54,24 @@ public class Cliente {
         return cpf;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
