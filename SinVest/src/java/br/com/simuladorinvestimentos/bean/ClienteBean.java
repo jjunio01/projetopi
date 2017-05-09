@@ -20,25 +20,28 @@ import javax.faces.bean.RequestScoped;
 public class ClienteBean {
 
     private Cliente cliente = new Cliente();
+    private Cliente cli = new Cliente();
 
     public void salvar(Cliente cli) {
         ClienteDao.getInstance().create(cli);
         cliente = new Cliente();
     }
 
-    public void excluir(String txt) {
-        ClienteDao.getInstance().delete(txt);
+    public void excluir() {
+        ClienteDao.getInstance().delete(this.cliente.getCpf());
         cliente = new Cliente();
     }
 
-    public void alterar(Cliente c) {
-        ClienteDao.getInstance().update(c);
+    public void alterar() { 
+        this.cli.setCpf(cliente.getCpf());
+        this.setCliente(cli);
+        ClienteDao.getInstance().update(this.cliente);
         cliente = new Cliente();
     }
 
-    public void consultar(String c) {
-        this.cliente = ClienteDao.getInstance().read(c);
-        cliente = new Cliente();
+    public void consultar(String cpf) {
+        this.cliente = ClienteDao.getInstance().read(cpf);
+
     }
 
     public List<Cliente> consultarTodos() {
@@ -51,6 +54,14 @@ public class ClienteBean {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Cliente getCli() {
+        return cli;
+    }
+
+    public void setCli(Cliente cli) {
+        this.cli = cli;
     }
 
 }

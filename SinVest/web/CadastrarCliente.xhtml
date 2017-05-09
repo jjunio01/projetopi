@@ -25,7 +25,6 @@
                 <p:commandButton value="Início" action="index.xhtml"></p:commandButton>
                 <p:commandButton id="com" value="Salvar" action="#{clienteBean.salvar(clienteBean.cliente)}" update="@form"></p:commandButton>
             </p:panelGrid> 
-            <h:outputText value="Cadastrado com sucesso!" rendered="#{com == true}"></h:outputText>
         </h:form>
     </h:body>
 </html>

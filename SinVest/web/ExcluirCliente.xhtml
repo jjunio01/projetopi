@@ -19,7 +19,7 @@
                 <p:inputMask id= 'cpf' mask='999.999.999-99' value="#{clienteBean.cliente.cpf}">
                 </p:inputMask>
                 <p:commandButton  id="cliente" value="Excluir" update="@form" 
-                                  action="#{clienteBean.excluir(clienteBean.cliente.cpf)}" ></p:commandButton>                  
+                                  action="#{clienteBean.excluir()}" ></p:commandButton>                  
             </p:panelGrid>
         </h:form>        
     </h:body>
