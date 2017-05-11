@@ -32,14 +32,15 @@ public class Cliente implements Serializable {
     }
 
     public Cliente() {
+        
+    }
+    
+    public void setId(Integer id){
+        this.id=id;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getId() {
+        return this.id;
     }
 
     public String getNome() {

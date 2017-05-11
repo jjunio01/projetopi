@@ -15,12 +15,16 @@ import javax.faces.bean.RequestScoped;
  *
  * @author Jose Junio
  */
-@RequestScoped
+
 @ManagedBean
+@RequestScoped
 public class ClienteBean {
 
-    private Cliente cliente = new Cliente();
-    private Cliente cli = new Cliente();
+    private Cliente cliente;
+    
+    public ClienteBean(){
+        this.cliente=new Cliente();
+    }
 
     public void salvar(Cliente cli) {
         ClienteDao.getInstance().create(cli);
@@ -32,9 +36,9 @@ public class ClienteBean {
         cliente = new Cliente();
     }
 
-    public void alterar() { 
-        this.cli.setCpf(cliente.getCpf());
-        this.setCliente(cli);
+    public void alterar() {
+        
+        this.setCliente(cliente);
         ClienteDao.getInstance().update(this.cliente);
         cliente = new Cliente();
     }
@@ -54,14 +58,6 @@ public class ClienteBean {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    public Cliente getCli() {
-        return cli;
-    }
-
-    public void setCli(Cliente cli) {
-        this.cli = cli;
     }
 
 }

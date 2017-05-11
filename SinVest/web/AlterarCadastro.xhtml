@@ -15,23 +15,25 @@
                 <p:menuitem value="Início" action="index.xhtml">                    
                 </p:menuitem>
             </p:menubar>
+
             <p:panelGrid columns="3">
                 <h:outputLabel for='c' value="CPF:"></h:outputLabel>
-                <p:inputMask  id= 'c' mask='999.999.999-99' binding="#{cpf}">
+                <p:inputMask  id= 'c' mask='999.999.999-99' value="#{clienteBean.cliente.cpf}">
                 </p:inputMask>
                 <p:commandButton  id="cliente" value="Buscar" update="@form" 
-                                  action="#{clienteBean.consultar(cpf.value)}" ></p:commandButton>                  
+                                  action="#{clienteBean.consultar(clienteBean.cliente.cpf)}" ></p:commandButton>                  
             </p:panelGrid>
-            <br></br> 
+            <h:inputHidden value="#{clienteBean.cliente.id}"></h:inputHidden>
+                <br></br>                 
             <p:panelGrid columns="2" id="coluna">
                 <h:outputLabel for='nome' value="Nome:"></h:outputLabel>
-                <h:inputText id="nome" value="#{clienteBean.cli.nome}"></h:inputText>
+                <h:inputText id="nome" value="#{clienteBean.cliente.nome}"></h:inputText>
                 <h:outputLabel value="CPF:"></h:outputLabel>
                 <h:outputText value="#{clienteBean.cliente.cpf}"></h:outputText>
                 <h:outputLabel for='email' value="E-mail:"></h:outputLabel>
-                <h:inputText id='email' value="#{clienteBean.cli.email}"></h:inputText>
+                <h:inputText id='email' value="#{clienteBean.cliente.email}"></h:inputText>
                 <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
-                <p:inputMask id="dataNasc" mask="99/99/9999" value="#{clienteBean.cli.dataNasc}">
+                <p:inputMask id="dataNasc" mask="99/99/9999" value="#{clienteBean.cliente.dataNasc}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </p:inputMask>
                 <p:commandButton value="Salvar" action="#{clienteBean.alterar()}" update="@form"></p:commandButton>
