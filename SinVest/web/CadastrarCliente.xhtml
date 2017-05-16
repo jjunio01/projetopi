@@ -1,31 +1,39 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Simulador de Investimentos</title>
-    </h:head>
-    <h:body>
-        <h1>Crie seu Cadastro</h1>
-        <h:form id="cadastroForm">
-            <p:panelGrid columns="2" id="coluna">
-                <h:outputLabel for='nome' value="Nome:"></h:outputLabel>
-                <h:inputText id="nome" value="#{clienteBean.cliente.nome}"></h:inputText>
-                <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
-                <p:inputMask id= 'cpf' mask='999.999.999-99' value="#{clienteBean.cliente.cpf}">
-                </p:inputMask>
-                <h:outputLabel for='email' value="E-mail:"></h:outputLabel>
-                <h:inputText id='email' value="#{clienteBean.cliente.email}"></h:inputText>
-                <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
-                <p:inputMask id="dataNasc" mask="99/99/9999" value="#{clienteBean.cliente.dataNasc}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </p:inputMask>
-                <p:commandButton value="Início" action="index.xhtml"></p:commandButton>
-                <p:commandButton id="com" value="Salvar" action="#{clienteBean.salvar(clienteBean.cliente)}" update="@form"></p:commandButton>
-            </p:panelGrid> 
-        </h:form>
-    </h:body>
-</html>
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="index.xhtml">
 
+    <h:body>        
+        <p:fieldset legend="Formulário de Cadastro">
+            <h:form id="cadastroForm">
+                <p:messages autoUpdate="true" showDetail="true"></p:messages>
+
+                <p:panelGrid columns="2" id="coluna">
+                    <h:outputLabel for='nome' value="Nome:"></h:outputLabel>
+                    <h:inputText id="nome" value="#{controllerCliente.cliente.nome}" required="true" 
+                                 requiredMessage="Nome é uma informação obrigatória"></h:inputText>
+                    <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
+                    <p:inputMask id= 'cpf' mask='999.999.999-99' value="#{controllerCliente.cliente.cpf}"
+                                 required="true" requiredMessage="CPF é uma informação obrigatória">
+                    </p:inputMask>
+                    <h:outputLabel  for='email' value="E-mail:"></h:outputLabel>
+                    <h:inputText id='email' value="#{controllerCliente.cliente.email}" required="true"
+                                 requiredMessage="E-mail é uma informação obrigatória"></h:inputText>
+                    <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
+                    <p:inputMask id="dataNasc" mask="99/99/9999" value="#{controllerCliente.cliente.dataNasc}" 
+                                 required="true" requiredMessage="Data de Nascimento é uma informação obrigatória">
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+                    </p:inputMask> 
+
+                    <p:button value="Início" href="index.xhtml" ></p:button>
+                    <p:commandButton id="com" value="Salvar" action="#{controllerCliente.salvar(controllerCliente.cliente)}"
+                                     update="@form"></p:commandButton>
+                </p:panelGrid> 
+            </h:form>   
+        </p:fieldset>
+    </h:body>
+</ui:decorate>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             template="index.xhtml"
+             xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:separator/>
+        <p:panelGrid columns="2"> 
+            <h:outputLabel for="login" value="Login"></h:outputLabel>
+            <h:inputText id="login" value="#{controllerUsuario.usuario.login}"></h:inputText>                   
+            <h:outputLabel for="senha2" value="Senha:" />
+            <h:inputSecret id="senha2" value="#{controllerUsuario.usuario.senha}" label="Senha"/> 
+        </p:panelGrid>
+    </h:body>
+</ui:decorate>
+

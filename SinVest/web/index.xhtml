@@ -2,26 +2,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Simulador de Investimentos</title>
     </h:head>
     <h:body>
-        <h1>Bem Vindo ao Simulador de Investimentos</h1>
-        <p:fieldset id="op" legend="CADASTRO">
-            <h:form>                
-                <p:menubar>
-                    <p:menuitem>OPÇÕES</p:menuitem>
-                    <p:submenu>
-                        <p:menuitem value="Cadastrar Cliente" action="CadastrarCliente.xhtml"></p:menuitem>
-                        <p:menuitem value="Alterar Cadastro" action="AlterarCadastro.xhtml"></p:menuitem>
-                        <p:menuitem value="Excluir Cadastro" action="ExcluirCliente.xhtml"></p:menuitem>
-                        <p:menuitem value="Consultar Cadastro" action="ConsultarCliente.xhtml"></p:menuitem>
-                        <p:menuitem value="Consultar Todos" action="ConsultarTodos.xhtml"></p:menuitem>
-                    </p:submenu> 
-                </p:menubar>
-            </h:form>
-        </p:fieldset>
+        <h1>Simulador de Investimentos</h1>
+        <h:form>               
+            <p:menubar>
+                <p:submenu label="Cadastro">                        
+                    <p:menuitem value="Cadastrar Cliente" action="CadastrarCliente.xhtml"></p:menuitem>
+                    <p:menuitem value="Alterar Cadastro" action="AlterarCadastro.xhtml"></p:menuitem>
+                    <p:menuitem value="Excluir Cadastro" action="ExcluirCliente.xhtml"></p:menuitem>
+                    <p:menuitem value="Consultar Cadastro" action="ConsultarCliente.xhtml"></p:menuitem>
+                    <p:menuitem value="Consultar Todos" action="ConsultarTodos.xhtml"></p:menuitem>
+                </p:submenu> 
+                <p:submenu label="Simulador">
+                    <p:menuitem value="Poupança"/>
+
+                </p:submenu>
+                <p:submenu label="Comparação de Investimentos">
+
+                </p:submenu>
+                <p:submenu label="Perfil do Investidor">
+
+                </p:submenu>
+                <p:submenu label="Login" >
+                    <p:menuitem value="Login" action="Login.xhtml"></p:menuitem>
+
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+        <ui:insert></ui:insert>
     </h:body>
 </html>
 

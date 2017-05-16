@@ -1,46 +1,46 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Simulador de Investimentos</title>
-    </h:head>
-    <h:body>
-        <h1>Bem Vindo ao Simulador de Investimentos</h1> <br/>
-        <h2>Consultar Cadastro</h2>
-        <h:form>           
-            <p:menubar>
-                <p:menuitem value="Início" action="index">                    
-                </p:menuitem>
-            </p:menubar>
-            <p:panelGrid columns="3">
-                  <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
-                <p:inputMask id= 'cpf' mask='999.999.999-99' value="#{clienteBean.cliente.cpf}">
-                </p:inputMask>
-                  <p:commandButton  id="cliente" value="Buscar" update="@form"
-                             action="#{clienteBean.consultar(clienteBean.cliente.cpf)}" ></p:commandButton>                  
-            </p:panelGrid>
-            <p:toolbarGroup>
-            </p:toolbarGroup>
-            <p:dataTable id="consult" value="#{clienteBean.cliente}">
-                <p:column headerText="Nome">
-                    <h:outputText value="#{clienteBean.cliente.nome}"></h:outputText>
-                </p:column>
-                <p:column headerText="CPF">
-                    <h:outputText value="#{clienteBean.cliente.cpf}"></h:outputText>
-                </p:column>
-                <p:column headerText="E-mail">
-                    <h:outputText value="#{clienteBean.cliente.email}" />
-                </p:column>
-                <p:column headerText="Data de Nascimento">
-                    <h:outputText value="#{clienteBean.cliente.dataNasc}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                    </h:outputText>
-                </p:column>
-            </p:dataTable>
-        </h:form>        
-    </h:body>
-</html>
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="index.xhtml">
+
+    <h2>Consultar Cadastro</h2>
+    <h:form>           
+        <p:menubar>
+            <p:menuitem value="Início" url="index.xhtml" update="@form">                    
+            </p:menuitem>
+        </p:menubar>
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+        <p:panelGrid columns="3">
+            <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
+            <p:inputMask  style="margin-right:10px" placeholder="CPF" id= 'cpf' mask='999.999.999-99' value="#{controllerCliente.cliente.cpf}">
+            </p:inputMask>
+            <p:commandButton id="cliente" value="Buscar" update="@all" 
+                                  action="#{controllerCliente.consultar(controllerCliente.cliente.cpf)}">
+            </p:commandButton>                 
+        </p:panelGrid>
+        <p:dataTable id="consula" value="#{controllerCliente.cliente}">
+            <p:column headerText="Nome">
+                <h:outputText value="#{controllerCliente.cliente.nome}"></h:outputText>
+            </p:column>
+            <p:column headerText="CPF">
+                <h:outputText value="#{controllerCliente.cliente.cpf}"></h:outputText>
+            </p:column>
+            <p:column headerText="E-mail">
+                <h:outputText value="#{controllerCliente.cliente.email}" />
+            </p:column>
+            <p:column headerText="Data de Nascimento">
+                <h:outputText value="#{controllerCliente.cliente.dataNasc}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Login">
+                <h:outputText value="#{clientes.usu.login}"></h:outputText>
+            </p:column>
+        </p:dataTable>
+    </h:form>        
+</ui:decorate>
 
