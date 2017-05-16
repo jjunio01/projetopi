@@ -51,6 +51,7 @@ public class Poupanca implements Serializable {
         this.rendimentos = rendimentos;
     }
 
+    
     public Integer getId() {
         return id;
     }

@@ -35,6 +35,12 @@ public class InvestDao {
         session.saveOrUpdate(p);
         DAOBancoMySql.fecharTransacao(session);
     }
+    
+    public void atualizarPoupanca(Poupanca p) throws ErroSistema{
+        Session session = DAOBancoMySql.iniciarTransacao();
+        session.update(p);
+        DAOBancoMySql.fecharTransacao(session);
+    }
 
     public double recuperarValor() {
         return 0;

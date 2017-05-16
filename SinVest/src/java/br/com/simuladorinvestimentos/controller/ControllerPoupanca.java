@@ -20,38 +20,35 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class InvestPoupanca implements Investimentos{
-    
-    private Poupanca poup;
-    private double txJuros;
+public class ControllerPoupanca implements Investimentos {
+
+    private Poupanca poup = new Poupanca();
     private double txSelic = 11.25;
-    private double txTr = 0.0929;
-    
-    
-    public void salvarPoup(Poupanca p) throws ErroSistema{
-        InvestDao.getInstance().salvarPoupanca(p);
+    private double txTr = 0.0001036;
+    private double indiceCorrecao;
+    private double txAdicional;
+
+    public void salvarPoup() throws ErroSistema {
+        InvestDao.getInstance().salvarPoupanca(this.poup);
+        calcularRendimentos();
     }
 
     @Override
-    public void calcularRendimentos(Poupanca p) {
-        
-        if (txSelic > 8.5){
-            this.txJuros = 0.005 + txTr; 
+    public void calcularRendimentos() {
+
+        int periodo = this.poup.getPeriodo() / 30;
+
+        if (periodo == 0) {
+            this.poup.setRendimentos(0);
         } else {
-            this.txJuros = ((0.7 * txSelic) / 12 ) + txTr; 
+            this.poup.setRendimentos(this.poup.getValor() * this.getIndiceCorrecao() * periodo);
         }
-        int periodo = p.getPeriodo() / 30;
-        
-            p.setRendimentos(p.getValor() * this.txJuros * periodo);
-        
-        InvestPoupanca invest = new InvestPoupanca();
-        invest.setPoup(p);
         try {
-            InvestDao.getInstance().salvarPoupanca(p);
+            InvestDao.getInstance().atualizarPoupanca(this.poup);
         } catch (ErroSistema ex) {
-            Logger.getLogger(InvestPoupanca.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerPoupanca.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public Poupanca getPoup() {
@@ -60,14 +57,6 @@ public class InvestPoupanca implements Investimentos{
 
     public void setPoup(Poupanca poup) {
         this.poup = poup;
-    }
-
-    public double getTxJuros() {
-        return txJuros;
-    }
-
-    public void setTxJuros(double txJuros) {
-        this.txJuros = txJuros;
     }
 
     public double getTxSelic() {
@@ -85,7 +74,27 @@ public class InvestPoupanca implements Investimentos{
     public void setTxTr(double txTr) {
         this.txTr = txTr;
     }
-    
+
+    public double getIndiceCorrecao() {
+
+        if (this.txSelic > 8.5) {
+            indiceCorrecao = 0.005 + this.txTr;
+        } else {
+            this.indiceCorrecao = 1;
+        }
+        return indiceCorrecao;
+    }
+
+    public double getTxAdicional() {
+        return txAdicional;
+    }
+
+    public void setTxAdicional(double txAdicional) {
+        this.txAdicional = txAdicional;
+    }
+
+    public ControllerPoupanca() {
+    }
     
     
 }

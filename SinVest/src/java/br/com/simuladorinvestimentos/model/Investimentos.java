@@ -13,6 +13,6 @@ package br.com.simuladorinvestimentos.model;
 public interface Investimentos {
    
     
-   public void calcularRendimentos(Poupanca p);         
+   public void calcularRendimentos();         
     
 }
