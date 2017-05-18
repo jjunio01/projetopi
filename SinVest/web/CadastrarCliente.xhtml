@@ -6,7 +6,6 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              template="index.xhtml">
-
     <h:body>        
         <p:fieldset legend="Formulário de Cadastro">
             <h:form id="cadastroForm">
@@ -22,12 +21,16 @@
                     </p:inputMask>
                     <h:outputLabel  for='email' value="E-mail:"></h:outputLabel>
                     <h:inputText id='email' value="#{controllerCliente.cliente.email}" required="true"
-                                 requiredMessage="E-mail é uma informação obrigatória"></h:inputText>
+                                  requiredMessage="E-mail é uma informação obrigatória"></h:inputText>
                     <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
                     <p:inputMask id="dataNasc" mask="99/99/9999" value="#{controllerCliente.cliente.dataNasc}" 
                                  required="true" requiredMessage="Data de Nascimento é uma informação obrigatória">
                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
                     </p:inputMask> 
+                    <h:outputLabel for="login" value="Login"></h:outputLabel>
+                    <h:inputText id="login" value="#{controllerCliente.cliente.usu.login}"></h:inputText>
+                    <h:outputLabel for="senha" value="Senha"></h:outputLabel>
+                    <h:inputSecret id="senha" value="#{controllerCliente.cliente.usu.senha}"></h:inputSecret>
 
                     <p:button value="Início" href="index.xhtml" ></p:button>
                     <p:commandButton id="com" value="Salvar" action="#{controllerCliente.salvar(controllerCliente.cliente)}"

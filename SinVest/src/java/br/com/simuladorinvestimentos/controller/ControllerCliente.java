@@ -8,7 +8,6 @@ package br.com.simuladorinvestimentos.controller;
 import br.com.simuladorinvestimentos.model.dao.ClienteDao;
 import br.com.simuladorinvestimentos.model.Cliente;
 import br.com.simuladorinvestimentos.model.ErroSistema;
-import br.com.simuladorinvestimentos.model.Usuario;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,8 +31,11 @@ public class ControllerCliente {
 
     public void salvar(Cliente cli) throws ErroSistema {
         try {
+            //ControllerUsuario contUsu = new ControllerUsuario();
+            
+           // contUsu.salvar(cli.getUsu());
             ClienteDao.getInstance().create(cli);
-
+            
             adicionarMensagem("Cliente: ", "Salvo com sucesso", FacesMessage.SEVERITY_INFO);
         } catch (JDBCConnectionException erroAbrirConexao) {
             adicionarMensagem(erroAbrirConexao.getMessage(), erroAbrirConexao.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);

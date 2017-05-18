@@ -3,6 +3,7 @@ package br.com.simuladorinvestimentos.model;
 import com.sun.istack.internal.Nullable;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Cliente implements Serializable {
     private Date dataNasc;
     @Column(nullable = false)
     private String email;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Nullable
     private Usuario usu;
 
@@ -39,7 +40,7 @@ public class Cliente implements Serializable {
     }
 
     public Cliente() {
-
+            usu = new Usuario();
     }
 
     public void setId(Integer id) {

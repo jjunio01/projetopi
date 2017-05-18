@@ -11,11 +11,11 @@
     <h:form>
         <p:panelGrid columns="2"> 
             <h:outputLabel for="valor" value="Valor"></h:outputLabel>
-            <h:inputText id="valor" value="#{controllerPoupanca.poup.valor}"></h:inputText>                   
-            <h:outputLabel for="periodo" value="Quantidade de dias:" />
-            <h:inputText id="periodo" value="#{controllerPoupanca.poup.periodo}" label="Senha"/> 
-            <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerPoupanca.salvarPoup()}"></p:commandButton>
-            <h:outputText value="#{controllerPoupanca.poup.rendimentos}"></h:outputText> 
+            <h:inputText id="valor" value="#{controllerInvestimentos.poupanca.valor}"></h:inputText>                   
+            <h:outputLabel for="periodo" value="Quantidade de meses:" />
+            <h:inputText id="periodo" value="#{controllerInvestimentos.poupanca.periodo}"/> 
+            <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimentos.salvarInvestimento(controllerInvestimentos.poupanca)}"></p:commandButton>
+            <h:outputText value="#{controllerInvestimentos.poupanca.rendimentos}"></h:outputText> 
         </p:panelGrid>
     </h:form>
 </ui:decorate>
