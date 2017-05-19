@@ -11,8 +11,10 @@
         <p:panelGrid columns="2"> 
             <h:outputLabel for="valor" value="Valor"></h:outputLabel>
             <h:inputText id="valor" value="#{controllerInvestimentos.cdb.valor}" ></h:inputText> 
-            <h:outputLabel for="periodo" value="Quantidade de meses:" />
-            <h:inputText id="periodo" value="#{controllerInvestimentos.cdb.periodo}"/>            
+            <h:outputLabel for="periodo" value="Quantidade de dias úteis:" />
+            <h:inputText id="periodo" value="#{controllerInvestimentos.cdb.periodo}"/> 
+            <h:outputLabel for="percentCDI" value="Percentual do CDI.  Ex. 80%"></h:outputLabel>
+            <h:inputText id="percentCDI" value="#{controllerInvestimentos.cdb.percentCDI}"></h:inputText>
             <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimentos.salvarInvestimentos()}"></p:commandButton>
             <h:outputText value="#{controllerInvestimentos.cdb.rendimentos}"></h:outputText>             
         </p:panelGrid>

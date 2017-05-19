@@ -8,7 +8,7 @@
              template="index.xhtml">
 
     <h2>Consultar Cadastro</h2>
-    <h:form>           
+    <h:form >           
         <p:menubar>
             <p:menuitem value="Início" url="index.xhtml" update="@form">                    
             </p:menuitem>
@@ -18,11 +18,11 @@
             <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
             <p:inputMask  style="margin-right:10px" placeholder="CPF" id= 'cpf' mask='999.999.999-99' value="#{controllerCliente.cliente.cpf}">
             </p:inputMask>
-            <p:commandButton id="cliente" value="Buscar" update="@all" 
-                                  action="#{controllerCliente.consultar(controllerCliente.cliente.cpf)}">
+            <p:commandButton id="cliente" value="Buscar" update="@form" 
+                             action="#{controllerCliente.consultar(controllerCliente.cliente.cpf)}">
             </p:commandButton>                 
         </p:panelGrid>
-        <p:dataTable id="consula" value="#{controllerCliente.cliente}">
+        <p:dataTable id="consula" widgetVar="tab" value="#{controllerCliente.cliente}" >
             <p:column headerText="Nome">
                 <h:outputText value="#{controllerCliente.cliente.nome}"></h:outputText>
             </p:column>

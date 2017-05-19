@@ -11,10 +11,12 @@ public class ClienteTeste {
         InvestCDB cdb = new InvestCDB();
         ControllerInvestimentos contInvest = new ControllerInvestimentos();
         
-        cdb.setPeriodo(30);
-        cdb.setValor(8780);
+       // cdb.setPeriodo(30);
+        //cdb.setValor(8780);
         
        // contInvest.salvarInvestimentos(cdb);
+       
+        System.out.println(Math.pow(2, 3));
         
         
 

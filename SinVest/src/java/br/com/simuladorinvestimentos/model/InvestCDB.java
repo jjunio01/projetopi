@@ -15,26 +15,25 @@ import javax.persistence.Entity;
 public class InvestCDB extends Investimentos {
 
     private double taxaIR;
-    private final double cdi = 0.0375;
+    private final double cdi = 11.13;
     private double indiceRendimentos;
+    private double percentCDI;
 
     public InvestCDB() {
     }
 
     @Override
     public void calcularRendimentos() {
-        indiceRendimentos = 1;
-        double rend = 0;
 
-        for (int i = 1; i < this.getPeriodo(); i++) {
+        for (int i = 0; i < this.getPeriodo(); i++) {
+            indiceRendimentos = 1;
 
-            indiceRendimentos = indiceRendimentos * Math.pow((Math.pow(((this.cdi / 100) + 1), 0.003968254)), this.getPeriodo());
+           
+            indiceRendimentos = indiceRendimentos * Math.pow((Math.pow(((getCdi() / 100) + 1), 0.003968254)), this.getPeriodo());
 
         }
-        rend = ((indiceRendimentos - 1) * this.getValor());
 
-        this.setRendimentos(rend);
-
+        this.setRendimentos(((indiceRendimentos - 1) * this.getValor()));
     }
 
     public double getTaxaIR() {
@@ -45,8 +44,8 @@ public class InvestCDB extends Investimentos {
         this.taxaIR = taxaIR;
     }
 
-    public double getCdi() {
-        return cdi;
+    public double getCdi() {       
+        return cdi * (getPercentCDI() / 100);
     }
 
     public double getIndiceRendimentos() {
@@ -56,5 +55,14 @@ public class InvestCDB extends Investimentos {
     public void setIndiceRendimentos(double indiceRendimentos) {
         this.indiceRendimentos = indiceRendimentos;
     }
+
+    public double getPercentCDI() {
+        return percentCDI;
+    }
+
+    public void setPercentCDI(double percentCDI) {
+        this.percentCDI = percentCDI;
+    }
+    
 
 }
