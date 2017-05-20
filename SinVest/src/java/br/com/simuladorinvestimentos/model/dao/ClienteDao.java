@@ -68,10 +68,25 @@ public class ClienteDao implements DAOGenerico<Cliente> {
             throw new ErroSistema("Erro ao consultar cliente", erroRead);
         } finally{
             return cli;
-        }
-        
+        }        
         
     }
+    
+     public Cliente readLogin(String login)  throws ErroSistema{
+        Session session = DAOBancoMySql.iniciarTransacao();
+        Cliente cli = null;
+        try {
+            Query consulta = session.createQuery("from Usuario where login like '" + login + "'");
+            cli = (Cliente) consulta.list().get(0);
+            return cli;
+        } catch (Exception erroRead) {
+            throw new ErroSistema("Erro ao consultar login", erroRead);
+        } finally{
+            return cli;
+        }        
+        
+    }    
+    
 
     @Override
     public void delete(String consult)  throws ErroSistema{

@@ -18,19 +18,23 @@
                     <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
                     <p:inputMask id= 'cpf' mask='999.999.999-99' value="#{controllerCliente.cliente.cpf}"
                                  required="true" requiredMessage="CPF é uma informação obrigatória">
-                    </p:inputMask>
+                    </p:inputMask>                    
                     <h:outputLabel  for='email' value="E-mail:"></h:outputLabel>
-                    <h:inputText id='email' value="#{controllerCliente.cliente.email}" required="true"
-                                  requiredMessage="E-mail é uma informação obrigatória"></h:inputText>
+                    <h:inputText validatorMessage="E-mail não aceito" id='email' value="#{controllerCliente.cliente.email}" required="true"
+                                 requiredMessage="E-mail é uma informação obrigatória">
+                        <f:validateRegex  pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                    </h:inputText>
                     <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
                     <p:inputMask id="dataNasc" mask="99/99/9999" value="#{controllerCliente.cliente.dataNasc}" 
                                  required="true" requiredMessage="Data de Nascimento é uma informação obrigatória">
                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
                     </p:inputMask> 
                     <h:outputLabel for="login" value="Login"></h:outputLabel>
-                    <h:inputText id="login" value="#{controllerCliente.cliente.usu.login}"></h:inputText>
+                    <h:inputText id="login" value="#{controllerCliente.cliente.usu.login}"
+                                 required="true" requiredMessage="Login é uma informação obrigatória"></h:inputText>
                     <h:outputLabel for="senha" value="Senha"></h:outputLabel>
-                    <h:inputSecret id="senha" value="#{controllerCliente.cliente.usu.senha}"></h:inputSecret>
+                    <h:inputSecret id="senha" value="#{controllerCliente.cliente.usu.senha}"
+                                   required="true" requiredMessage="Senha é uma informação obrigatória"></h:inputSecret>
 
                     <p:button value="Início" href="index.xhtml" ></p:button>
                     <p:commandButton id="com" value="Salvar" action="#{controllerCliente.salvar(controllerCliente.cliente)}"

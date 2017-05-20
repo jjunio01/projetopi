@@ -31,12 +31,16 @@ public class ControllerCliente {
 
     public void salvar(Cliente cli) throws ErroSistema {
         try {
-            //ControllerUsuario contUsu = new ControllerUsuario();
-            
-           // contUsu.salvar(cli.getUsu());
-            ClienteDao.getInstance().create(cli);
-            
-            adicionarMensagem("Cliente: ", "Salvo com sucesso", FacesMessage.SEVERITY_INFO);
+            Cliente novo = ClienteDao.getInstance().read(cli.getCpf());
+            Cliente novoLogin = ClienteDao.getInstance().readLogin(cli.getUsu().getLogin());
+            if (novo == null) {
+                ClienteDao.getInstance().create(cli);
+                adicionarMensagem(null, "Cliente Salvo com sucesso", FacesMessage.SEVERITY_INFO);
+
+            } else {
+                adicionarMensagem(null, "Já cadastrado cliente para este CPF informado.", FacesMessage.SEVERITY_WARN);
+            }
+
         } catch (JDBCConnectionException erroAbrirConexao) {
             adicionarMensagem(erroAbrirConexao.getMessage(), erroAbrirConexao.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
