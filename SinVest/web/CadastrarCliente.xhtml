@@ -30,10 +30,10 @@
                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
                     </p:inputMask> 
                     <h:outputLabel for="login" value="Login"></h:outputLabel>
-                    <h:inputText id="login" value="#{controllerCliente.cliente.usu.login}"
+                    <h:inputText id="login" value="#{controllerCliente.cliente.usuario.login}"
                                  required="true" requiredMessage="Login é uma informação obrigatória"></h:inputText>
                     <h:outputLabel for="senha" value="Senha"></h:outputLabel>
-                    <h:inputSecret id="senha" value="#{controllerCliente.cliente.usu.senha}"
+                    <h:inputSecret id="senha" value="#{controllerCliente.cliente.usuario.senha}"
                                    required="true" requiredMessage="Senha é uma informação obrigatória"></h:inputSecret>
 
                     <p:button value="Início" href="index.xhtml" ></p:button>

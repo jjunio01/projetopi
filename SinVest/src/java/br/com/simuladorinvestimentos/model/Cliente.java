@@ -1,6 +1,6 @@
 package br.com.simuladorinvestimentos.model;
 
-import com.sun.istack.internal.Nullable;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -28,19 +28,18 @@ public class Cliente implements Serializable {
     @Column(nullable = false)
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
-    @Nullable
-    private Usuario usu;
+    private Usuario usuario;
 
-    public Cliente(String nome, String cpf, Date dataNasc, String email, Usuario usu) {
+    public Cliente(String nome, String cpf, Date dataNasc, String email, Usuario usuario) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.email = email;
-        this.usu = usu;
+        this.usuario = usuario;
     }
 
     public Cliente() {
-            usu = new Usuario();
+            usuario = new Usuario();
     }
 
     public void setId(Integer id) {
@@ -83,12 +82,14 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    public Usuario getUsu() {
-        return usu;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsu(Usuario usu) {
-        this.usu = usu;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
+
+    
 
 }

@@ -11,11 +11,11 @@
         <h:form id="formLogin">
             <p:panelGrid columns="2">
                 <h:outputLabel for='login' value="Login:" ></h:outputLabel>
-                <h:inputText id='login' value="#{controllerUsuario.usuario.login}"></h:inputText>
+                <h:inputText id='login' value="#{controllerCliente.cliente.usuario.login}"></h:inputText>
                 <h:outputLabel for='senha' value="Senha:"></h:outputLabel>
-                <p:password id="senha" value="#{controllerUsuario.usuario.senha}"></p:password>   
+                <p:password id="senha" value="#{controllerCliente.cliente.usuario.senha}"></p:password>   
             </p:panelGrid>
-            <p:commandButton value="Logar" action="#{controllerCliente.cliente.setUsu(usu)}"></p:commandButton>
+            <p:commandButton value="Logar" action="#{controllerCliente.usuarioLogado(controllerCliente.cliente)}"></p:commandButton>
             <p:commandButton value="Início" action="index.xhtml"></p:commandButton>   
         </h:form>
     </h:body>

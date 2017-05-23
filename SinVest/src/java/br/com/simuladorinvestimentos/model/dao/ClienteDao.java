@@ -7,6 +7,7 @@ package br.com.simuladorinvestimentos.model.dao;
 
 import br.com.simuladorinvestimentos.model.Cliente;
 import br.com.simuladorinvestimentos.model.ErroSistema;
+import br.com.simuladorinvestimentos.model.Usuario;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -33,7 +34,7 @@ public class ClienteDao implements DAOGenerico<Cliente> {
     }
 
     @Override
-    public void create(Cliente t) throws ErroSistema{
+    public void create(Cliente t) throws ErroSistema {
 
         Session session = DAOBancoMySql.iniciarTransacao();
         try {
@@ -42,23 +43,21 @@ public class ClienteDao implements DAOGenerico<Cliente> {
             throw new ErroSistema("Erro ao inserir cliente no banco de dados", erroCreate);
         }
         DAOBancoMySql.fecharTransacao(session);
-
     }
 
     @Override
-    public void update(Cliente t)  throws ErroSistema{
+    public void update(Cliente t) throws ErroSistema {
         Session session = DAOBancoMySql.iniciarTransacao();
         try {
             session.update(t);
         } catch (Exception erroUpdate) {
-           throw new ErroSistema("Erro ao atualizar cliente no banco de dados",erroUpdate);
+            throw new ErroSistema("Erro ao atualizar cliente no banco de dados", erroUpdate);
         }
         DAOBancoMySql.fecharTransacao(session);
-
     }
 
     @Override
-    public Cliente read(String cpf)  throws ErroSistema{
+    public Cliente read(String cpf) throws ErroSistema {
         Session session = DAOBancoMySql.iniciarTransacao();
         Cliente cli = null;
         try {
@@ -66,49 +65,45 @@ public class ClienteDao implements DAOGenerico<Cliente> {
             cli = (Cliente) consulta.list().get(0);
         } catch (Exception erroRead) {
             throw new ErroSistema("Erro ao consultar cliente", erroRead);
-        } finally{
+        } finally {
             return cli;
-        }        
-        
+        }
+
     }
-    
-     public Cliente readLogin(String login)  throws ErroSistema{
+
+    public Usuario readLogin(String login) throws ErroSistema {
         Session session = DAOBancoMySql.iniciarTransacao();
-        Cliente cli = null;
+        Usuario usuario = null;
         try {
             Query consulta = session.createQuery("from Usuario where login like '" + login + "'");
-            cli = (Cliente) consulta.list().get(0);
-            return cli;
-        } catch (Exception erroRead) {
-            throw new ErroSistema("Erro ao consultar login", erroRead);
+            usuario = (Usuario) consulta.list().get(0);
+        } catch (Exception erroReadLogin) {
+            throw new ErroSistema("Erro ao consultar login", erroReadLogin);
         } finally{
-            return cli;
-        }        
-        
-    }    
-    
+            return usuario;
+        }       
 
-    @Override
-    public void delete(String consult)  throws ErroSistema{
-        Session session = DAOBancoMySql.iniciarTransacao();
-        List<Cliente> clientes = readALL();
-        Cliente cli = null;
-        for (int i = 0; i < clientes.size(); i++) {
-
-            if (consult.equals(clientes.get(i).getCpf())) {
-                cli = clientes.get(i);
-            }
-        }
-        try {
-            session.delete(cli);
-        } catch (Exception erroDelete) {
-            throw new ErroSistema("Erro nao excluir cliente", erroDelete);
-        }
-        DAOBancoMySql.fecharTransacao(session);
     }
 
     @Override
-    public List<Cliente> readALL()  throws ErroSistema{
+    public void delete(String cpf) throws ErroSistema {
+
+        Session session = DAOBancoMySql.iniciarTransacao();
+        Cliente cli = null;
+        try {
+            Query consulta = session.createQuery("from Cliente where cpf like '" + cpf + "'");
+            cli = (Cliente) consulta.list().get(0);
+            session.delete(cli);
+        } catch (Exception erroRead) {
+            throw new ErroSistema("Erro ao deletar cliente", erroRead);
+        } finally {
+            DAOBancoMySql.fecharTransacao(session);
+        }
+
+    }
+
+    @Override
+    public List<Cliente> readALL() throws ErroSistema {
         Session session = DAOBancoMySql.iniciarTransacao();
         List<Cliente> clientes = null;
         try {
@@ -117,7 +112,7 @@ public class ClienteDao implements DAOGenerico<Cliente> {
             Query consulta = session.createQuery("from Cliente");
             clientes = consulta.list();
         } catch (Exception erroReadAll) {
-            throw new ErroSistema("Erro ao consultar lista de clientes",erroReadAll);
+            throw new ErroSistema("Erro ao consultar lista de clientes", erroReadAll);
         }
 
         DAOBancoMySql.fecharTransacao(session);

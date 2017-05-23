@@ -9,13 +9,16 @@
 
     <p:separator/>
     <h:form>
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+        <h2>Simulador da Poupança</h2>
         <p:panelGrid columns="2"> 
             <h:outputLabel for="valor" value="Valor"></h:outputLabel>
-            <h:inputText id="valor" value="#{controllerInvestimentos.poupanca.valor}"></h:inputText>                   
+            <h:inputText id="valor" value="#{controllerInvestimentos.poupanca.valor}" required="true" requiredMessage="Valor é uma informação obrigatória"></h:inputText>                   
             <h:outputLabel for="periodo" value="Quantidade de meses:" />
-            <h:inputText id="periodo" value="#{controllerInvestimentos.poupanca.periodo}"/> 
-            <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimentos.salvarInvestimento(controllerInvestimentos.poupanca)}"></p:commandButton>
-            <h:outputText value="#{controllerInvestimentos.poupanca.rendimentos}"></h:outputText> 
+            <h:inputText id="periodo" value="#{controllerInvestimentos.poupanca.periodo}" required="true" requiredMessage="Quantidade de meses é uma informação obrigatória"/> 
+            <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimentos.salvarInvestimento(
+                                                                                   controllerInvestimentos.poupanca)}"></p:commandButton>
+            <h:outputText value="#{controllerInvestimentos.poupanca.rendimentos}"></h:outputText>            
         </p:panelGrid>
     </h:form>
 </ui:decorate>
