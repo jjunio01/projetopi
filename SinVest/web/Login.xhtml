@@ -6,10 +6,9 @@
              template="index.xhtml"
              xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
+        <h:form >
             <p:messages autoUpdate="true" showDetail="true"></p:messages>
             <p:separator/>
             <p:panelGrid columns="2"> 
@@ -17,8 +16,8 @@
                 <h:inputText id="login" value="#{controllerCliente.cliente.usuario.login}"></h:inputText>                   
                 <h:outputLabel for="senha2" value="Senha:" />
                 <h:inputSecret id="senha2" value="#{controllerCliente.cliente.usuario.senha}" label="Senha"/> 
-                <p:commandButton update="@form" value="Efetuar Login"
-                                 action="#{controllerCliente.usuarioLogado(controllerUsuario.usuario)}"></p:commandButton>
+                <p:commandButton   update="@form" value="Efetuar Login"
+                                 action="#{controllerCliente.usuarioLogado(controllerCliente.cliente.usuario)}"></p:commandButton>
 
             </p:panelGrid>
         </h:form>

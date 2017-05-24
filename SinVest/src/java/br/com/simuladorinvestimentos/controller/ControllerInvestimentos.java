@@ -5,19 +5,19 @@
  */
 package br.com.simuladorinvestimentos.controller;
 
-import br.com.simuladorinvestimentos.model.ErroSistema;
+import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.InvestCDB;
 import br.com.simuladorinvestimentos.model.InvestPoupanca;
 import br.com.simuladorinvestimentos.model.dao.InvestimentoDAO;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Jose Junio
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ControllerInvestimentos {
 
     private InvestPoupanca poupanca = new InvestPoupanca();

@@ -5,7 +5,7 @@
  */
 package br.com.simuladorinvestimentos.controller;
 
-import br.com.simuladorinvestimentos.model.ErroSistema;
+import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.dao.UsuarioDao;
 import br.com.simuladorinvestimentos.model.Usuario;
 import javax.faces.bean.ManagedBean;

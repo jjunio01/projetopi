@@ -5,7 +5,7 @@
  */
 package br.com.simuladorinvestimentos.model.dao;
 
-import br.com.simuladorinvestimentos.model.ErroSistema;
+import br.com.simuladorinvestimentos.util.ErroSistema;
 import java.util.List;
 
 /**

@@ -7,12 +7,13 @@ package br.com.simuladorinvestimentos.controller;
 
 import br.com.simuladorinvestimentos.model.dao.ClienteDao;
 import br.com.simuladorinvestimentos.model.Cliente;
-import br.com.simuladorinvestimentos.model.ErroSistema;
+import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.Usuario;
+import br.com.simuladorinvestimentos.util.Criptografia;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.exception.JDBCConnectionException;
 
@@ -21,21 +22,25 @@ import org.hibernate.exception.JDBCConnectionException;
  * @author Jose Junio
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ControllerCliente {
 
     private Cliente cliente = new Cliente();
+    private boolean login;
 
     public ControllerCliente() {
 
     }
 
-    public void salvar(Cliente cli) throws ErroSistema {
+    public void salvar(Cliente clienteNovo) throws ErroSistema {
         try {
-            Cliente novo = ClienteDao.getInstance().read(cli.getCpf());
-            Usuario novoLogin = ClienteDao.getInstance().readLogin(cli.getUsuario().getLogin());
+            Cliente novo = ClienteDao.getInstance().read(clienteNovo.getCpf());
+            Usuario novoLogin = ClienteDao.getInstance().readLogin(clienteNovo.getUsuario().getLogin());
             if (novo == null && novoLogin == null) {
-                ClienteDao.getInstance().create(cli);
+                Usuario usurioNovo = clienteNovo.getUsuario();
+                usurioNovo.setSenha(Criptografia.criptografarSenha(clienteNovo.getUsuario().getSenha()));
+                clienteNovo.setUsuario(usurioNovo);
+                ClienteDao.getInstance().create(clienteNovo);
                 adicionarMensagem(null, "Cliente Salvo com sucesso", FacesMessage.SEVERITY_INFO);
 
             } else {
@@ -99,19 +104,19 @@ public class ControllerCliente {
 
     public void usuarioLogado(Usuario usuario) throws ErroSistema {
 
-        boolean logado = false;
+        this.login = false;
 
         Usuario usuarioLogin = ClienteDao.getInstance().readLogin(usuario.getLogin());
 
         if (usuarioLogin == null) {
-            logado = false;
+            this.login = false;
             adicionarMensagem("Login não realizado:", "Não existe cliente com este login cadastrado", FacesMessage.SEVERITY_WARN);
         } else {
-            if (usuarioLogin.getSenha() == usuario.getSenha()) {
-                logado = true;
+            if (usuarioLogin.getSenha().equals(usuario.getSenha())) {
+                this.login = true;
                 adicionarMensagem("Login:", "Usuário Logado", FacesMessage.SEVERITY_WARN);
-            } else{
-                 adicionarMensagem("Login não efetuado:", "Senha incorreta", FacesMessage.SEVERITY_WARN);
+            } else {
+                adicionarMensagem("Login não efetuado:", "Senha incorreta", FacesMessage.SEVERITY_WARN);
             }
         }
 
@@ -124,6 +129,16 @@ public class ControllerCliente {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
+    }
+    
+    
 
     public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Severity tipoErro) {
         FacesContext context = FacesContext.getCurrentInstance();

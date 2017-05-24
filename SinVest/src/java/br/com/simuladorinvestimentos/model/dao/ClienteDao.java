@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package br.com.simuladorinvestimentos.model.dao;
-
 import br.com.simuladorinvestimentos.model.Cliente;
-import br.com.simuladorinvestimentos.model.ErroSistema;
+import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.Usuario;
 import java.util.List;
 import org.hibernate.Query;
