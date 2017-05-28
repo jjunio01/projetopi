@@ -26,7 +26,7 @@ import org.hibernate.exception.JDBCConnectionException;
 public class ControllerCliente {
 
     private Cliente cliente = new Cliente();
-    private boolean login;
+    
 
     public ControllerCliente() {
 
@@ -42,6 +42,8 @@ public class ControllerCliente {
                 clienteNovo.setUsuario(usurioNovo);
                 ClienteDao.getInstance().create(clienteNovo);
                 adicionarMensagem(null, "Cliente Salvo com sucesso", FacesMessage.SEVERITY_INFO);
+                ControllerLogin logado = new ControllerLogin();
+                logado.setClienteLogado(clienteNovo);
 
             } else {
                 adicionarMensagem(null, "Já cadastrado cliente para este CPF informado ou Login", FacesMessage.SEVERITY_WARN);
@@ -58,10 +60,10 @@ public class ControllerCliente {
         try {
             Cliente novo = ClienteDao.getInstance().read(this.cliente.getCpf());
             if (novo == null) {
-                adicionarMensagem(null, "Cliente não encontrado para este CPF:", FacesMessage.SEVERITY_WARN);
+                adicionarMensagem(null, "Cliente não encontrado para este CPF:", FacesMessage.SEVERITY_ERROR);
             } else {
                 ClienteDao.getInstance().delete(this.cliente.getCpf());
-                adicionarMensagem("Cliente: ", "Excluído com sucesso", FacesMessage.SEVERITY_INFO);
+                adicionarMensagem(null, "Cadastro excluído com sucesso", FacesMessage.SEVERITY_INFO);
                 cliente = new Cliente();
             }
         } catch (ErroSistema erroExcluir) {
@@ -74,7 +76,7 @@ public class ControllerCliente {
         try {
             this.setCliente(cliente);
             ClienteDao.getInstance().update(this.cliente);
-            adicionarMensagem("Cliente: ", "Alterado com sucesso", FacesMessage.SEVERITY_INFO);
+            adicionarMensagem(null, "Cadastro alterado com sucesso", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema erroAlterar) {
             adicionarMensagem(erroAlterar.getMessage(), erroAlterar.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -85,7 +87,7 @@ public class ControllerCliente {
         try {
             this.cliente = ClienteDao.getInstance().read(cpf);
             if (cliente == null) {
-                adicionarMensagem("Não foi encontrado nenhum cliente:", " para o CPF informado", FacesMessage.SEVERITY_WARN);
+                adicionarMensagem(null, " Não encontrado Cliente para o CPF informado", FacesMessage.SEVERITY_ERROR);
             }
 
         } catch (ErroSistema erroConsultar) {
@@ -97,31 +99,12 @@ public class ControllerCliente {
 
         List<Cliente> clientes = ClienteDao.getInstance().readALL();
         if (clientes == null || clientes.isEmpty()) {
-            adicionarMensagem("Não existe nenhum cliente:", " cadastrado no sistema", FacesMessage.SEVERITY_WARN);
+            adicionarMensagem(null, "Não existem clientes cadastrados no sistema", FacesMessage.SEVERITY_ERROR);
         }
         return clientes;
     }
-
-    public void usuarioLogado(Usuario usuario) throws ErroSistema {
-
-        this.login = false;
-
-        Usuario usuarioLogin = ClienteDao.getInstance().readLogin(usuario.getLogin());
-
-        if (usuarioLogin == null) {
-            this.login = false;
-            adicionarMensagem("Login não realizado:", "Não existe cliente com este login cadastrado", FacesMessage.SEVERITY_WARN);
-        } else {
-            if (usuarioLogin.getSenha().equals(usuario.getSenha())) {
-                this.login = true;
-                adicionarMensagem("Login:", "Usuário Logado", FacesMessage.SEVERITY_WARN);
-            } else {
-                adicionarMensagem("Login não efetuado:", "Senha incorreta", FacesMessage.SEVERITY_WARN);
-            }
-        }
-
-    }
-
+    
+    
     public Cliente getCliente() {
         return cliente;
     }
@@ -129,15 +112,6 @@ public class ControllerCliente {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public boolean isLogin() {
-        return login;
-    }
-
-    public void setLogin(boolean login) {
-        this.login = login;
-    }
-    
     
 
     public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Severity tipoErro) {

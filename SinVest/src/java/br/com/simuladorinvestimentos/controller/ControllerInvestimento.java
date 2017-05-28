@@ -18,7 +18,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class ControllerInvestimentos {
+public class ControllerInvestimento {
 
     private InvestPoupanca poupanca = new InvestPoupanca();
     private InvestCDB cdb = new InvestCDB();
@@ -64,7 +64,7 @@ public class ControllerInvestimentos {
         this.cdb = cdb;
     }
 
-    public ControllerInvestimentos() {
+    public ControllerInvestimento() {
     }
 
 }

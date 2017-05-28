@@ -12,7 +12,7 @@ import javax.persistence.Entity;
  * @author Jose Junio
  */
 @Entity
-public class InvestPoupanca extends Investimentos {
+public class InvestPoupanca extends Investimento {
 
     private double taxaTr = 0.0001069;
     private double taxaSelic = 11.25;

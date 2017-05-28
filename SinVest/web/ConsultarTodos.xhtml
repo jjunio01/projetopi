@@ -7,10 +7,8 @@
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              template="index.xhtml">
 
-    <h1>Clientes Cadastrados</h1>
     <h:form>            
-        <p:commandButton value="Início" action="index.xhtml" ></p:commandButton>
-        <p:dataTable var="clientes" value="#{controllerCliente.consultarTodos()}" rows="10" paginator="true">                
+        <p:dataTable  var="clientes" value="#{controllerCliente.consultarTodos()}" rows="10" paginator="true">                
             <p:column headerText="Nome">
                 <h:outputText value="#{clientes.nome}"/>
             </p:column>

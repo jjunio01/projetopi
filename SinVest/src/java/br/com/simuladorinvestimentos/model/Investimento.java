@@ -15,7 +15,7 @@ import javax.persistence.Id;
  * @author Jose Junio
  */
 @Entity
-public abstract class Investimentos implements Serializable {
+public abstract class Investimento implements Serializable {
 
     @Id
     @GeneratedValue
@@ -24,7 +24,7 @@ public abstract class Investimentos implements Serializable {
     private int periodo;
     private double rendimentos;
 
-    public Investimentos() {
+    public Investimento() {
         
     }
 

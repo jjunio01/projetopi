@@ -5,8 +5,12 @@
              xmlns:p="http://primefaces.org/ui"
              xmlns:f="http://xmlns.jcp.org/jsf/core"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             template="index.xhtml">
-    <h:body>        
+             template="index.xhtml"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body> 
+        <c:if test="#{controllerLogin.clienteLogado == null}">
+            
+        </c:if>
         <p:fieldset legend="Formulário de Cadastro">
             <h:form id="cadastroForm">
                 <p:messages autoUpdate="true" showDetail="true"></p:messages>

@@ -83,6 +83,20 @@ public class ClienteDao implements DAOGenerico<Cliente> {
         }       
 
     }
+    
+     public Cliente readLogado(String login) throws ErroSistema {
+        Session session = DAOBancoMySql.iniciarTransacao();
+        Cliente cliente = null;
+        try {
+            Query consulta = session.createQuery(" from Cliente as cli where cli.usuario.login like'" + login + "'");
+            cliente = (Cliente) consulta.list().get(0);
+        } catch (Exception erroReadLogin) {
+            throw new ErroSistema("Erro ao consultar cliente logado", erroReadLogin);
+        } finally{
+            return cliente;
+        }       
+
+    }
 
     @Override
     public void delete(String cpf) throws ErroSistema {
@@ -106,8 +120,6 @@ public class ClienteDao implements DAOGenerico<Cliente> {
         Session session = DAOBancoMySql.iniciarTransacao();
         List<Cliente> clientes = null;
         try {
-            Session session2 = DAOBancoMySql.iniciarTransacao();
-            session = session2;
             Query consulta = session.createQuery("from Cliente");
             clientes = consulta.list();
         } catch (Exception erroReadAll) {
