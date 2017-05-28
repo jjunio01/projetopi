@@ -9,13 +9,13 @@ public class ClienteTeste {
 
     public static void main(String[] args) throws ErroSistema {
 
-        String login = "test";
+        String login = "junio";
 
         ControllerLogin logado = new ControllerLogin();
 
         Cliente cliente = ClienteDao.getInstance().readLogado(login);
 
-        if (cliente == null) {
+        if (cliente != null) {
             System.out.println(cliente.getNome());
         }
 
