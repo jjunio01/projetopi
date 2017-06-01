@@ -31,17 +31,13 @@
                 </p:submenu> 
                 <p:submenu label="Simulador">
                     <p:menuitem value="Poupança" action="SimuladorPoupanca.xhtml"/>
-                    <p:menuitem value="CDB" action="SimuladorCDB.xhtml"></p:menuitem>
-
+                    <p:menuitem value="CDB Pré-fixado" action="SimuladorCDB.xhtml"/>
+                    <p:menuitem value="LCI" action="SimuladorLCI.xhtml"/>
                 </p:submenu>
                 <p:submenu label="Comparação de Investimentos">
 
-                </p:submenu>                
-                <p:submenu label="Login" >
-                    <p:menuitem rendered="#{controllerLogin.clienteLogado != null}" value="Login" action="Login.xhtml"></p:menuitem>
-                    <p:menuitem  value="Logout" action="#{controllerLogin.logout()}"></p:menuitem>
-
-                </p:submenu>
+                </p:submenu>                    
+                <p:menuitem  value="Logout" action="#{controllerLogin.logout()}"></p:menuitem>                
             </p:menubar>
             <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/> 
         </h:form>

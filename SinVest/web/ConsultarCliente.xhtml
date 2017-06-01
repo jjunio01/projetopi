@@ -16,10 +16,10 @@
         <p:messages autoUpdate="true" showDetail="true"></p:messages>
         <p:panelGrid columns="3">
             <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
-            <p:inputMask  style="margin-right:10px" placeholder="CPF" id= 'cpf' mask='999.999.999-99' value="#{controllerCliente.cliente.cpf}">
+            <p:inputMask  placeholder="CPF" id= 'cpf' mask='999.999.999-99' value="#{cpf}">
             </p:inputMask>
             <p:commandButton id="cliente" value="Buscar" update="@form" 
-                             action="#{controllerCliente.consultar(controllerCliente.cliente.cpf)}">
+                             action="#{controllerCliente.consultar(cpf)}">
             </p:commandButton>                 
         </p:panelGrid>
         <p:dataTable id="consula" widgetVar="tab" value="#{controllerCliente.cliente}" >

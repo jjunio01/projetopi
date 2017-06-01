@@ -7,8 +7,10 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
+       
     </h:head>
-    <h:body>
+    <h:body style= "background-image: url('#{resource['imagem.png']}')">
+        
         <c:if test="#{controllerLogin.clienteLogado != null}">
             <script>
                 location.href = "index.xhtml";

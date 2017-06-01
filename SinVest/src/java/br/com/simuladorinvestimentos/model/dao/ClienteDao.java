@@ -8,6 +8,7 @@ import br.com.simuladorinvestimentos.model.Cliente;
 import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.Usuario;
 import java.util.List;
+import org.hibernate.PropertyNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -23,7 +24,7 @@ public class ClienteDao implements DAOGenerico<Cliente> {
 
     private ClienteDao() {
     }
-
+    
     public static ClienteDao getInstance() {
 
         if (instance == null) {
@@ -56,7 +57,7 @@ public class ClienteDao implements DAOGenerico<Cliente> {
     }
 
     @Override
-    public Cliente read(String cpf) throws ErroSistema {
+    public Cliente read(String cpf) throws ErroSistema, PropertyNotFoundException {
         Session session = DAOBancoMySql.iniciarTransacao();
         Cliente cli = null;
         try {
@@ -65,6 +66,7 @@ public class ClienteDao implements DAOGenerico<Cliente> {
         } catch (Exception erroRead) {
             throw new ErroSistema("Erro ao consultar cliente", erroRead);
         } finally {
+            DAOBancoMySql.fecharTransacao(session);
             return cli;
         }
 
@@ -79,6 +81,7 @@ public class ClienteDao implements DAOGenerico<Cliente> {
         } catch (Exception erroReadLogin) {
             throw new ErroSistema("Erro ao consultar login", erroReadLogin);
         } finally{
+            DAOBancoMySql.fecharTransacao(session);
             return usuario;
         }       
 
@@ -93,6 +96,7 @@ public class ClienteDao implements DAOGenerico<Cliente> {
         } catch (Exception erroReadLogin) {
             throw new ErroSistema("Erro ao consultar cliente logado", erroReadLogin);
         } finally{
+            DAOBancoMySql.fecharTransacao(session);
             return cliente;
         }       
 

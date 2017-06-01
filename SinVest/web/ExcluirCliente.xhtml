@@ -17,7 +17,7 @@
             <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
             <p:inputMask id= 'cpf' mask='999.999.999-99' value="#{controllerCliente.cliente.cpf}">
             </p:inputMask>
-            <p:commandButton  id="cliente" value="Excluir" update="@form" 
+            <p:commandButton icon="ui-icon-close"  id="cliente" value="Excluir" update="@form" 
                               action="#{controllerCliente.excluir()}" ></p:commandButton>                  
         </p:panelGrid>
     </h:form>        

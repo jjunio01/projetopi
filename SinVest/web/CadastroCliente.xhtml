@@ -51,7 +51,7 @@
                                    required="true" requiredMessage="Senha é uma informação obrigatória"></h:inputSecret>
                     <p:message for="senha"/>
                 </p:panelGrid> 
-                <p:commandButton id="com" value="Salvar" action="#{controllerCliente.salvar(controllerCliente.cliente)}"
+                <p:commandButton id="com" value="Salvar" icon="ui-icon-disk" action="#{controllerCliente.salvar(controllerCliente.cliente)}"
                                  update="@form" ></p:commandButton>                
 
                 <c:if test="#{controllerLogin.clienteLogado != null}">
