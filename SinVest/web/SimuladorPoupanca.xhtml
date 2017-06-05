@@ -8,20 +8,26 @@
 
 
     <p:separator/>
-    <h:form>
-        <p:messages autoUpdate="true" showDetail="true"></p:messages>
-        <h2>Simulador da Poupança</h2>
-        <p:panelGrid columns="2"> 
-            <h:outputLabel for="valor" value="Valor"></h:outputLabel>
-            <h:inputText id="valor"  value="#{controllerInvestimento.poupanca.valor}" required="true" requiredMessage="Valor é uma informação obrigatória">
-            </h:inputText>                   
-            <h:outputLabel for="periodo" value="Quantidade de meses:" />
-            <h:inputText id="periodo" value="#{controllerInvestimento.poupanca.periodo}" required="true" requiredMessage="Quantidade de meses é uma informação obrigatória"/> 
-            <h:outputLabel for="rendimentoLiquido" value="Rendimento Líquido"></h:outputLabel>
-            <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.poupanca.rendimentos}"></h:outputText>
-            <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.salvarInvestimento(
-                                                                                   controllerInvestimento.poupanca)}"></p:commandButton>
-        </p:panelGrid>
-    </h:form>
+    <center>
+        <h:form>
+            <p:messages autoUpdate="true" showDetail="true"></p:messages>
+            <h2>Simulador da Poupança</h2>
+            <p:panelGrid columns="2"> 
+                <h:outputLabel for="valor" value="Valor Inicial"></h:outputLabel>
+                <h:inputText id="valor"  value="#{controllerInvestimento.poupanca.valor}" required="true" requiredMessage="Valor é uma informação obrigatória">
+                </h:inputText>                   
+                <h:outputLabel for="periodo" value="Quantidade de meses:" />
+                <h:inputText id="periodo" value="#{controllerInvestimento.poupanca.periodo}" required="true" requiredMessage="Quantidade de meses é uma informação obrigatória"/> 
+                <h:outputLabel for="rendimentoLiquido" value="Rendimento Líquido"></h:outputLabel>
+                <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.poupanca.rendimentos}"></h:outputText>
+                <h:outputLabel for="valorFinal" value="Valor Atualizado"></h:outputLabel>
+                <h:outputText id="valorFinal" value="#{controllerInvestimento.poupanca.valorAtualizado}"></h:outputText>
+                <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.salvarInvestimento()}"></p:commandButton>
+            </p:panelGrid>
+        </h:form>
+        <h3>
+            Valores baseados em estimativas e não são garantias de rentabilidade futura.
+        </h3>
+    </center>
 </ui:decorate>
 

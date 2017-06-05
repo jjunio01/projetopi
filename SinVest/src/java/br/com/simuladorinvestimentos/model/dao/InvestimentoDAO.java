@@ -7,6 +7,7 @@ package br.com.simuladorinvestimentos.model.dao;
 
 import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.InvestCDB;
+import br.com.simuladorinvestimentos.model.InvestLCI;
 import br.com.simuladorinvestimentos.model.InvestPoupanca;
 import java.util.List;
 import org.hibernate.Session;
@@ -22,7 +23,7 @@ public class InvestimentoDAO implements DAOGenerico{
 
     private InvestimentoDAO() {
     }
-
+    //Método que cria uma instância única de InvetimentoDAO
     public static InvestimentoDAO getInstance() {
 
         if (instance == null) {
@@ -55,7 +56,19 @@ public class InvestimentoDAO implements DAOGenerico{
         session.update(cdb);
         DAOBancoMySql.fecharTransacao(session);
     }
-
+    
+    public void salvarLCI(InvestLCI lci) throws ErroSistema{
+        Session session = DAOBancoMySql.iniciarTransacao();
+        session.saveOrUpdate(lci);
+        DAOBancoMySql.fecharTransacao(session);
+    }
+    
+    public void atualizar(InvestLCI lci) throws ErroSistema{
+        Session session = DAOBancoMySql.iniciarTransacao();
+        session.update(lci);
+        DAOBancoMySql.fecharTransacao(session);
+    }
+    
     @Override
     public void create(Object t) throws ErroSistema {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

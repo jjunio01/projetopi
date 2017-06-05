@@ -51,7 +51,9 @@ Contributor(s):
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="br.com.simuladorinvestimentos.model.Cliente"/>
     <mapping class="br.com.simuladorinvestimentos.model.Usuario"/>
+    <mapping class="br.com.simuladorinvestimentos.model.InvestLCI"/>
     <mapping class="br.com.simuladorinvestimentos.model.InvestPoupanca"/>
     <mapping class="br.com.simuladorinvestimentos.model.InvestCDB"/>
+    
   </session-factory>
 </hibernate-configuration>

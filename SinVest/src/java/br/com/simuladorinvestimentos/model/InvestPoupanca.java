@@ -17,7 +17,6 @@ public class InvestPoupanca extends Investimento {
     private double taxaTr = 0.0001069;
     private double taxaSelic = 11.25;
     private double taxaAdicional;
-    private double indiceRendimento;
 
     public InvestPoupanca() {
     }
@@ -25,8 +24,8 @@ public class InvestPoupanca extends Investimento {
     @Override
     public void calcularRendimentos() {
         
-        this.setRendimentos(this.getValor() * this.getPeriodo() * getIndeciRendimento());
-        
+        this.setRendimentos((this.getValor() * Math.pow( 1 + getIndiceRendimento(),this.getPeriodo())) - this.getValor());
+                
     }
 
     public double getTaxaTr() {
@@ -47,7 +46,7 @@ public class InvestPoupanca extends Investimento {
 
     public double getTaxaAdicional() {
         if (this.taxaSelic > 8.5) {
-            this.taxaAdicional = 0.005;
+            this.taxaAdicional = 0.0053;
         }
         return taxaAdicional;
     }
@@ -56,11 +55,18 @@ public class InvestPoupanca extends Investimento {
         this.taxaAdicional = taxaAdicional;
     }
 
-    public double getIndeciRendimento() {
-
-        indiceRendimento = getTaxaAdicional() + this.taxaTr;
-
-        return indiceRendimento;
+    @Override
+    public double getIndiceRendimento() {
+        setIndiceRendimento( getTaxaAdicional() + this.taxaTr);
+        return super.getIndiceRendimento();
     }
+
+    @Override
+    public double getValorAtualizado() {        
+        setValorAtualizado(this.getValor() + this.getRendimentos());
+        return super.getValorAtualizado();
+    }
+
+    
 
 }

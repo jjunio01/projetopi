@@ -6,6 +6,8 @@
 package br.com.simuladorinvestimentos.model.dao;
 
 import br.com.simuladorinvestimentos.util.ErroSistema;
+import br.com.simuladorinvestimentos.util.Message;
+import javax.faces.application.FacesMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -28,6 +30,7 @@ public class DAOBancoMySql {
         this.sessionFactory = abrirSession();
     }
 
+    //Obtém uma instancia única do DAOBancoMySql
     public static DAOBancoMySql getInstance() throws ErroSistema {
 
         if (instance == null) {
@@ -36,42 +39,52 @@ public class DAOBancoMySql {
         return instance;
     }
 
+    //Abressão conexão com o banco.
     public SessionFactory abrirSession() throws ErroSistema {
 
-        SessionFactory factory = null; 
+        SessionFactory factory = null;
         try {
             factory = new Configuration().configure().buildSessionFactory();
             Session session = factory.openSession();
         } catch (JDBCConnectionException erroAbrirSession) {
+            Message.getInstance().adicionarMensagem(
+                    null, "Não foi possível abrir a conexão com o banco de dados", FacesMessage.SEVERITY_INFO);
             throw new ErroSistema(
                     "Não foi possível abrir a conexão com o banco de dados", erroAbrirSession);
 
         }
+
         return factory;
 
     }
 
-    public static Session iniciarTransacao() throws ErroSistema{
-
+    //Recupera a sesão aberta e inicia uma transação com o banco
+    public static Session iniciarTransacao() throws ErroSistema {
+        //Abre uma sessão de conexão com o banco
         Session session = getInstance().abrirSession().openSession();
         try {
+            //Inicia uma transação
             session.beginTransaction();
         } catch (NullPointerException erroIniciarTransacao) {
             erroIniciarTransacao.getStackTrace();
         } catch (JDBCConnectionException erroIniciarTransacao) {
             erroIniciarTransacao.printStackTrace();
         }
+        //Retorna uma sessão aberta e com uma transação iniciada
         return session;
 
     }
 
-    public static void fecharTransacao(Session session) throws ErroSistema{
+    //Recupera a sessão e encerra a transação iniciadas e fecha a conexão.
+    public static void fecharTransacao(Session session) throws ErroSistema {
 
         try {
+            //Encerra a transação da sessão recuperada
             session.getTransaction().commit();
         } catch (NullPointerException erroFecharTransacao) {
             erroFecharTransacao.printStackTrace();
         }
+        //Fecha a conexão com o banco.
         session.close();
 
     }

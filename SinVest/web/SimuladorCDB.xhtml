@@ -7,29 +7,37 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:f="http://xmlns.jcp.org/jsf/core">   
     <p:separator/>
-    <h2>Simulador CDB - Pré</h2>
-    <h:form>
-        <p:panelGrid columns="2"> 
-            <h:outputLabel for="valor" value="Valor"></h:outputLabel>
-            <h:inputText id="valor" value="#{controllerInvestimento.cdb.valor}" ></h:inputText> 
-            <h:outputLabel for="periodo" value="Quantidade de dias úteis.   " />
-            <h:inputText id="periodo" value="#{controllerInvestimento.cdb.periodo}"/> 
-            <h:outputLabel for="percentCDI" value="Percentual do CDI.  Ex. 80%"></h:outputLabel>
-            <h:inputText id="percentCDI" value="#{controllerInvestimento.cdb.percentCDI}"></h:inputText>
-            <h:outputLabel for="rendimento" value="Rendimento Bruto"></h:outputLabel>
-            <h:outputText id="rendimento" value="#{controllerInvestimento.cdb.rendimentos}"></h:outputText>
-            <h:outputLabel for="rendimentoLiquido" value="Rendimento Líquido"></h:outputLabel>
-            <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.cdb.rendimentoLiquido}"></h:outputText>
-            <h:selectOneMenu label="Valor" value="">
-                <f:selectItem itemLabel="R$ 2.000,00" itemValue="
-                              " itemDescription="va"></f:selectItem>   
-                <f:selectItem itemLabel="R$ 500,00" itemValue="500" itemDescription="va"></f:selectItem>
-            </h:selectOneMenu>
-
-
-
-            <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.salvarInvestimentos()}"></p:commandButton>
-        </p:panelGrid>
-    </h:form>
+    <center>
+        <h2>Simulador CDB - Pré</h2>
+        <h:form>
+            <p:panelGrid columns="2"> 
+                <h:outputLabel for="valor" value="Valor"></h:outputLabel>
+                <h:selectOneMenu label="Valor" value="#{controllerInvestimento.cdb.valor}">
+                    <f:selectItem itemLabel="R$ 500,00" itemValue="500"/>
+                    <f:selectItem itemLabel="R$ 2.000,00" itemValue="2000"/>
+                    <f:selectItem itemLabel="R$ 5.000,00" itemValue="5000"/>
+                </h:selectOneMenu>
+                <h:outputLabel for="periodo" value="Prazo" />
+                <h:selectOneMenu label="Prazo" value="#{controllerInvestimento.cdb.periodo}">
+                    <f:selectItem itemLabel="6 meses" itemValue="126"/>
+                    <f:selectItem itemLabel="1 anos" itemValue="252"/>
+                    <f:selectItem itemLabel="2 anos" itemValue="504"/>
+                    <f:selectItem itemLabel="3 anos" itemValue="756"/>
+                </h:selectOneMenu>
+                <h:outputLabel for="percentCDI" value="Percentual do CDI.  Ex. 80%"></h:outputLabel>
+                <h:inputText id="percentCDI" value="#{controllerInvestimento.cdb.percentCDI}"></h:inputText>
+                <h:outputLabel for="rendimento" value="Rendimento Bruto"></h:outputLabel>
+                <h:outputText id="rendimento" value="#{controllerInvestimento.cdb.rendimentos}"></h:outputText>
+                <h:outputLabel for="rendimentoLiquido" value="Rendimento Líquido"></h:outputLabel>
+                <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.cdb.rendimentoLiquido}"></h:outputText>
+                <h:outputLabel for="valorAtualizado" value="Valor Atualizado"></h:outputLabel>
+                <h:outputText id="valorAtualizado" value="#{controllerInvestimento.cdb.valorAtualizado}"></h:outputText>
+                <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.salvarInvestimentos()}"></p:commandButton>
+            </p:panelGrid>
+        </h:form>
+        <h3>
+            Valores baseados em estimativas e não são garantias de rentabilidade futura.
+        </h3>
+    </center>
 </ui:decorate>
 

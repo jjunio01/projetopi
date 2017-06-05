@@ -10,12 +10,12 @@ import br.com.simuladorinvestimentos.model.Cliente;
 import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.Usuario;
 import br.com.simuladorinvestimentos.util.Criptografia;
+import br.com.simuladorinvestimentos.util.Message;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.exception.JDBCConnectionException;
@@ -49,17 +49,17 @@ public class ControllerCliente {
                 usurioNovo.setSenha(Criptografia.criptografarSenha(clienteNovo.getUsuario().getSenha()));
                 clienteNovo.setUsuario(usurioNovo);
                 ClienteDao.getInstance().create(clienteNovo);
-                adicionarMensagem(null, "Cliente Salvo com sucesso", FacesMessage.SEVERITY_INFO);
+                Message.getInstance().adicionarMensagem(null, "Cliente Salvo com sucesso", FacesMessage.SEVERITY_INFO);
                 ControllerLogin logado = new ControllerLogin();
                 logado.validaLogin(clienteNovo.getUsuario().getLogin(), clienteNovo.getUsuario().getSenha());
                 FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 
             } else {
-                adicionarMensagem(null, "Já cadastrado cliente para este CPF informado ou Login", FacesMessage.SEVERITY_WARN);
+                Message.getInstance().adicionarMensagem(null, "Já cadastrado cliente para este CPF ou Login informado", FacesMessage.SEVERITY_WARN);
             }
 
         } catch (JDBCConnectionException erroAbrirConexao) {
-            adicionarMensagem(erroAbrirConexao.getMessage(), erroAbrirConexao.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+            Message.getInstance().adicionarMensagem(erroAbrirConexao.getMessage(), erroAbrirConexao.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
         cliente = new Cliente();
@@ -69,14 +69,14 @@ public class ControllerCliente {
         try {
             Cliente novo = ClienteDao.getInstance().read(this.cliente.getCpf());
             if (novo == null) {
-                adicionarMensagem(null, "Cliente não encontrado para este CPF:", FacesMessage.SEVERITY_ERROR);
+                Message.getInstance().adicionarMensagem(null, "Cliente não encontrado para este CPF:", FacesMessage.SEVERITY_ERROR);
             } else {
                 ClienteDao.getInstance().delete(this.cliente.getCpf());
-                adicionarMensagem(null, "Cadastro excluído com sucesso", FacesMessage.SEVERITY_INFO);
+                Message.getInstance().adicionarMensagem(null, "Cadastro excluído com sucesso", FacesMessage.SEVERITY_INFO);
                 cliente = new Cliente();
             }
         } catch (ErroSistema erroExcluir) {
-            adicionarMensagem(erroExcluir.getMessage(), erroExcluir.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+            Message.getInstance().adicionarMensagem(erroExcluir.getMessage(), erroExcluir.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
 
@@ -85,9 +85,9 @@ public class ControllerCliente {
         try {
             this.setCliente(cliente);
             ClienteDao.getInstance().update(this.cliente);
-            adicionarMensagem(null, "Cadastro alterado com sucesso", FacesMessage.SEVERITY_INFO);
+            Message.getInstance().adicionarMensagem(null, "Cadastro alterado com sucesso", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema erroAlterar) {
-            adicionarMensagem(erroAlterar.getMessage(), erroAlterar.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+            Message.getInstance().adicionarMensagem(erroAlterar.getMessage(), erroAlterar.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
         cliente = new Cliente();
     }
@@ -96,12 +96,12 @@ public class ControllerCliente {
         try {
             this.cliente = ClienteDao.getInstance().read(cpf);
             if (cliente == null) {
-                adicionarMensagem(null, " Não encontrado Cliente para o CPF informado", FacesMessage.SEVERITY_ERROR);
+                Message.getInstance().adicionarMensagem(null, " Não encontrado Cliente para o CPF informado", FacesMessage.SEVERITY_ERROR);
                 this.cliente = new Cliente();
             }
 
         } catch (ErroSistema erroConsultar) {
-            adicionarMensagem(erroConsultar.getMessage(), erroConsultar.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+            Message.getInstance().adicionarMensagem(erroConsultar.getMessage(), erroConsultar.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
 
@@ -109,7 +109,7 @@ public class ControllerCliente {
 
         List<Cliente> clientes = ClienteDao.getInstance().readALL();
         if (clientes == null || clientes.isEmpty()) {
-            adicionarMensagem(null, "Não existem clientes cadastrados no sistema", FacesMessage.SEVERITY_ERROR);
+            Message.getInstance().adicionarMensagem(null, "Não existem clientes cadastrados no sistema", FacesMessage.SEVERITY_ERROR);
         }
         return clientes;
     }
@@ -121,13 +121,6 @@ public class ControllerCliente {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-    
-
-    public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Severity tipoErro) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        FacesMessage mensagem = new FacesMessage(tipoErro, sumario, detalhe);
-        context.addMessage(null, mensagem);
     }
 
 }

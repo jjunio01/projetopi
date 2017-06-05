@@ -32,11 +32,9 @@
                 <p:submenu label="Simulador">
                     <p:menuitem value="Poupança" action="SimuladorPoupanca.xhtml"/>
                     <p:menuitem value="CDB Pré-fixado" action="SimuladorCDB.xhtml"/>
-                    <p:menuitem value="LCI" action="SimuladorLCI.xhtml"/>
+                    <p:menuitem value="LCI/LCA Pré-fixado " action="SimuladorLCI.xhtml"/>
                 </p:submenu>
-                <p:submenu label="Comparação de Investimentos">
-
-                </p:submenu>                    
+                <p:menuitem value="Comparação de Investimentos" url="ComparativoInvestimentos.xhtml"/>         
                 <p:menuitem  value="Logout" action="#{controllerLogin.logout()}"></p:menuitem>                
             </p:menubar>
             <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/> 
