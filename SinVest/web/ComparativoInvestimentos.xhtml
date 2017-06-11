@@ -17,16 +17,15 @@ and open the template in the editor.
         <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/>
         <p:panelGrid columns="2"> 
             <h:outputLabel for="valor" value="Valor"></h:outputLabel>
-            <h:inputText id="valor" value="#{valor}" ></h:inputText> 
-            <h:outputLabel for="prazo" value="Prazo" />
-            <h:inputText id="prazo" value="#{periodo}"/> 
-            <h:outputLabel value="Comparar" ></h:outputLabel>
+            <p:inputNumber placeholder="Valor" minValue="0" required="true" requiredMessage="Valor deve ser maior que 0." id="valor" value="#{valor}" /> 
+            <h:outputLabel for="prazo" value="Período" />
+            <p:inputNumber placeholder="Peíodo entre 1 e 30" minValue="1" maxlength="4" maxValue="30" id="prazo" value="#{periodo}"/> 
+            <p:commandButton update="@form" value="Efetuar Comparação" action="#{controllerInvestimento.compararInvestimentos(periodo, valor)}"></p:commandButton>
             <h:selectOneRadio required="true" requiredMessage="Selecione o tipo de Prazo" label="Prazo" value="#{controllerInvestimento.tipoPrazo}">
                 <f:selectItem itemLabel="Dia" itemValue="1"></f:selectItem>
                 <f:selectItem itemLabel="Mês" itemValue="30"></f:selectItem>
                 <f:selectItem itemLabel="Ano" itemValue="360"></f:selectItem>
             </h:selectOneRadio>
-            <p:commandButton update="@form" value="Efetuar Comparação" action="#{controllerInvestimento.compararInvestimentos(periodo, valor)}"></p:commandButton>
         </p:panelGrid>
         <c:if test="#{controllerInvestimento.investimentos != null}">
             <p:dataTable  var="investimentos" value="#{controllerInvestimento.investimentos}">  
@@ -36,11 +35,11 @@ and open the template in the editor.
                 <p:column headerText="Período">
                     <h:outputText value="#{investimentos.periodo}" />
                 </p:column>
-                <p:column headerText="Rendimento">
-                    <h:outputText value="#{investimentos.rendimentos}" />
+                <p:column headerText="Rendimento Bruto">
+                    <h:outputText value="#{controllerInvestimento.formataValor(investimentos.rendimentos)}" />
                 </p:column>
                 <p:column headerText="Valor Atualizado">
-                    <h:outputText value="#{investimentos.valorAtualizado}" />
+                    <h:outputText value="#{controllerInvestimento.formataValor(investimentos.valorAtualizado)}" />
                 </p:column>
 
             </p:dataTable>

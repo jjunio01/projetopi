@@ -3,11 +3,13 @@ package br.com.simuladorinvestimentos.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +31,8 @@ public class Cliente implements Serializable {
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<HistoricoInvestimentos> historico;
 
     public Cliente(String nome, String cpf, Date dataNasc, String email, Usuario usuario) {
         this.nome = nome;
@@ -40,10 +44,6 @@ public class Cliente implements Serializable {
 
     public Cliente() {
             usuario = new Usuario();
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getId() {
@@ -90,6 +90,13 @@ public class Cliente implements Serializable {
         this.usuario = usuario;
     }
 
-    
+    public List<HistoricoInvestimentos> getHistorico() {
+        return historico;
+    }
 
+    public void setHistorico(List<HistoricoInvestimentos> historico) {
+        this.historico = historico;
+    }
+
+    
 }

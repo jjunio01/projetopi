@@ -5,6 +5,8 @@
  */
 package br.com.simuladorinvestimentos.controller;
 
+import br.com.simuladorinvestimentos.model.Cliente;
+import br.com.simuladorinvestimentos.model.HistoricoInvestimentos;
 import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.InvestCDB;
 import br.com.simuladorinvestimentos.model.InvestLCI;
@@ -12,9 +14,11 @@ import br.com.simuladorinvestimentos.model.InvestPoupanca;
 import br.com.simuladorinvestimentos.model.Investimento;
 import br.com.simuladorinvestimentos.model.dao.InvestimentoDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -30,38 +34,47 @@ public class ControllerInvestimento {
     private InvestimentoDAO investDao = InvestimentoDAO.getInstance();
     private int tipoPrazo;
     private List<Investimento> investimentos;
+    private List<HistoricoInvestimentos> hitorico;
 
-    public void salvarInvestimento() throws ErroSistema {
-        investDao.salvar(poupanca);
-        calcularRendimentos(poupanca);
+    public ControllerInvestimento() {
     }
 
-    public void calcularRendimentos(InvestPoupanca poupanca) throws ErroSistema {
+    public void salvar(Investimento investimento) throws ErroSistema {
+
+        if (investimento instanceof InvestPoupanca) {
+            investDao.salvar(poupanca);
+            calcularRendimentos(poupanca);
+
+        } else if (investimento instanceof InvestCDB) {
+            investDao.salvar(this.cdb);
+            calcularRendimentos(this.cdb);
+
+        } else if (investimento instanceof InvestLCI) {
+            investDao.salvarLCI(lci);
+            calcularRendimentos(this.lci);
+
+        }
+    }
+
+    public void calcularRendimentos(int periodo) {
+
+        poupanca.setPeriodo(periodo * 30);
         poupanca.calcularRendimentos();
-        investDao.atualizar(poupanca);
 
     }
 
-    public void salvarInvestimentos() throws ErroSistema {
-        investDao.salvar(this.cdb);
-        calcularRendimento(this.cdb);
+    public void calcularRendimentos(Investimento investimento) throws ErroSistema {
 
-    }
+        if (investimento instanceof InvestPoupanca) {
+            poupanca.calcularRendimentos();
 
-    public void calcularRendimento(InvestCDB cdb) throws ErroSistema {
-        cdb.calcularRendimentos();
-        investDao.atualizar(cdb);
-    }
+        } else if (investimento instanceof InvestCDB) {
+            cdb.calcularRendimentos();
 
-    public void salvarLCI() throws ErroSistema {
-        investDao.salvarLCI(lci);
-        calcularRendimentoLCI(this.lci);
+        } else if (investimento instanceof InvestLCI) {
+            lci.calcularRendimentos();
 
-    }
-
-    public void calcularRendimentoLCI(InvestLCI lci) throws ErroSistema {
-        lci.calcularRendimentos();
-        investDao.atualizar(lci);
+        }
     }
 
     public void compararInvestimentos(int periodo, double valor) throws ErroSistema {
@@ -71,13 +84,23 @@ public class ControllerInvestimento {
         cdb.setPeriodo(periodo * tipoPrazo);
         lci.setValor(valor);
         lci.setPeriodo(periodo * tipoPrazo);
-        salvarInvestimento();
-        salvarInvestimentos();
-        salvarLCI();
+        salvar(poupanca);
+        salvar(cdb);
+        salvar(lci);
         this.investimentos = new ArrayList<>();
         investimentos.add(poupanca);
         investimentos.add(cdb);
         investimentos.add(lci);
+        /*Cliente clienteLogado = (Cliente) FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap().get("user");
+        this.hitorico = new ArrayList<>();
+        hitorico = clienteLogado.getHistorico();
+        hitorico.iterator().next().setInvestimentos(investimentos);
+        hitorico.iterator().next().setDataAcesso(new Date());
+        clienteLogado.setHistorico(hitorico);
+        ControllerCliente contCliente = new ControllerCliente();
+        contCliente.setCliente(clienteLogado);
+        contCliente.alterar();*/
     }
 
     public InvestPoupanca getPoupanca() {
@@ -96,9 +119,6 @@ public class ControllerInvestimento {
         this.cdb = cdb;
     }
 
-    public ControllerInvestimento() {
-    }
-
     public InvestLCI getLci() {
         return lci;
     }
@@ -113,7 +133,7 @@ public class ControllerInvestimento {
 
     public void setTipoPrazo(int tipoPrazo) {
         this.tipoPrazo = tipoPrazo;
-    } 
+    }
 
     public List<Investimento> getInvestimentos() {
         return investimentos;
@@ -122,7 +142,18 @@ public class ControllerInvestimento {
     public void setInvestimentos(List<Investimento> investimentos) {
         this.investimentos = investimentos;
     }
-    
-    
+
+    public String formataValor(double investimento) {
+
+        return String.format("%.2f", investimento);
+    }
+
+    public List<HistoricoInvestimentos> getHitorico() {
+        return hitorico;
+    }
+
+    public void setHitorico(List<HistoricoInvestimentos> hitorico) {
+        this.hitorico = hitorico;
+    }
 
 }

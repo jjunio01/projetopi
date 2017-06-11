@@ -19,11 +19,10 @@
                 <p:inputMask  id= 'c' mask='999.999.999-99' value="#{cpf}">
                 </p:inputMask>
                 <p:commandButton  id="cliente" value="Buscar" update="@form" 
-                                  action="#{controllerCliente.consultar(cpf)}" ></p:commandButton>                  
+                                  action="#{controllerCliente.consultar(cpf)}" ></p:commandButton>    
             </p:panelGrid>
             <p:messages autoUpdate="true" showDetail="true"></p:messages>
-            <h:inputHidden value="#{controllerCliente.cliente.id}"></h:inputHidden>
-            <br></br>                 
+            <br></br>      
             <p:panelGrid columns="2" id="coluna">
                 <h:outputLabel for='nome' value="Nome:"></h:outputLabel>
                 <h:inputText id="nome" value="#{controllerCliente.cliente.nome}"></h:inputText>

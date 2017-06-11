@@ -18,6 +18,7 @@ public class InvestCDB extends Investimento {
     private final double cdi = 11.13;
     private double percentCDI = 90;
     private double rendimentoLiquido;
+    private double iof;
 
     public InvestCDB() {
     }
@@ -27,32 +28,33 @@ public class InvestCDB extends Investimento {
 
         for (int i = 0; i < this.getPeriodo(); i++) {
             setIndiceRendimento(1);
-
-            setIndiceRendimento(getIndiceRendimento() * Math.pow((Math.pow(((getCdi() / 100) + 1), 0.003968254)), this.getPeriodo())); 
+            //Calcula o índice de rendimento capitalizados ao dia.
+            setIndiceRendimento(getIndiceRendimento() * Math.pow((Math.pow(((getCdi() / 100) + 1), 0.003968254)), this.getPeriodo()));
 
         }
-
+        //Atualiza o valor dos rendimentos.
         this.setRendimentos(((getIndiceRendimento() - 1) * this.getValor()));
-
+        //Atualiza o valor do rendimento líquido.
         rendimentoLiquido = getRendimentos() * (1 - getTaxaIR());
-        setValorAtualizado(getValor() + rendimentoLiquido);
+        //Atualiza valor atualizado(Valor + Jutos).
+        setValorAtualizado(getValor() + rendimentoLiquido - getIof());
     }
 
     public double getTaxaIR() {
-        if (getPeriodo() <= 126) {
-            setTaxaIR(0.2250);
-        } else if (getPeriodo() > 126 && getPeriodo() <= 252) {
-            setTaxaIR(0.2000);
-        } else if (getPeriodo() > 252 && getPeriodo() <= 504) {
-            setTaxaIR(0.1750);
-        } else if (getPeriodo() > 504) {
-            setTaxaIR(0.1500);
-        }
         return taxaIR;
     }
 
-    public void setTaxaIR(double taxaIR) {
-        this.taxaIR = taxaIR;
+    public void setTaxaIR() {
+        if (getPeriodo() <= 126) {
+            this.taxaIR = (0.2250);
+        } else if (getPeriodo() > 126 && getPeriodo() <= 252) {
+            this.taxaIR = (0.2000);
+        } else if (getPeriodo() > 252 && getPeriodo() <= 504) {
+            this.taxaIR = (0.1750);
+        } else if (getPeriodo() > 504) {
+            this.taxaIR = (0.1500);
+        }
+
     }
 
     public double getCdi() {
@@ -76,6 +78,20 @@ public class InvestCDB extends Investimento {
         this.rendimentoLiquido = rendimentoLiquido;
     }
 
+    public double getIof() {
+        setIof();
+        return iof;
+    }
+
+    public void setIof() {
+
+        if (getPeriodo() <= 30) {
+            this.iof = 0;
+        } else {
+            this.iof = 0;
+        }
+    }
+
     @Override
     public double getValorAtualizado() {
         setValorAtualizado(this.getValor() + this.getRendimentoLiquido());
@@ -84,7 +100,7 @@ public class InvestCDB extends Investimento {
 
     @Override
     public void setValorAtualizado(double valorAtualizado) {
-       super.setValorAtualizado(valorAtualizado);
+        super.setValorAtualizado(valorAtualizado);
     }
 
 }

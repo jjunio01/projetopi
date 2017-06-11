@@ -24,20 +24,18 @@ public abstract class Investimento implements Serializable {
     private int periodo;
     private double rendimentos;
     private double indiceRendimento;
-    double valorAtualizado;
+    private double valorAtualizado;
 
     public Investimento() {
         
     }
 
+    public abstract void calcularRendimentos();
+
     public Integer getId() {
         return id;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    
     public double getValor() {
         return valor;
     }
@@ -79,6 +77,6 @@ public abstract class Investimento implements Serializable {
         this.valorAtualizado = valorAtualizado;
     }
 
-    public abstract void calcularRendimentos();
+    
 
 }

@@ -54,6 +54,7 @@ Contributor(s):
     <mapping class="br.com.simuladorinvestimentos.model.InvestLCI"/>
     <mapping class="br.com.simuladorinvestimentos.model.InvestPoupanca"/>
     <mapping class="br.com.simuladorinvestimentos.model.InvestCDB"/>
+    <mapping class="br.com.simuladorinvestimentos.model.HistoricoInvestimentos"/>
     
   </session-factory>
 </hibernate-configuration>

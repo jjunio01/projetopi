@@ -5,7 +5,6 @@
  */
 package br.com.simuladorinvestimentos.util;
 
-import br.com.simuladorinvestimentos.controller.ControllerLogin;
 import br.com.simuladorinvestimentos.model.Usuario;
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -39,7 +38,7 @@ public class AutenticacaoLogin implements Filter {
 
         if (session.getAttribute("user") != null) {
             
-            redireciona("logado.xhtml", (HttpServletResponse) response);
+            redireciona("index.xhtml", (HttpServletResponse) response);
 
         } else {
 

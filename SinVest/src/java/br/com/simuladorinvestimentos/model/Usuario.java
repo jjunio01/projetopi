@@ -35,6 +35,10 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -50,17 +54,5 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    
-    
-    
     
 }

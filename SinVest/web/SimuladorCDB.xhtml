@@ -27,12 +27,12 @@
                 <h:outputLabel for="percentCDI" value="Percentual do CDI.  Ex. 80%"></h:outputLabel>
                 <h:inputText id="percentCDI" value="#{controllerInvestimento.cdb.percentCDI}"></h:inputText>
                 <h:outputLabel for="rendimento" value="Rendimento Bruto"></h:outputLabel>
-                <h:outputText id="rendimento" value="#{controllerInvestimento.cdb.rendimentos}"></h:outputText>
+                <h:outputText id="rendimento" value="#{controllerInvestimento.formataValor(controllerInvestimento.cdb.rendimentos)}"></h:outputText>
                 <h:outputLabel for="rendimentoLiquido" value="Rendimento Líquido"></h:outputLabel>
-                <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.cdb.rendimentoLiquido}"></h:outputText>
+                <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.formataValor(controllerInvestimento.cdb.rendimentoLiquido)}"></h:outputText>
                 <h:outputLabel for="valorAtualizado" value="Valor Atualizado"></h:outputLabel>
-                <h:outputText id="valorAtualizado" value="#{controllerInvestimento.cdb.valorAtualizado}"></h:outputText>
-                <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.salvarInvestimentos()}"></p:commandButton>
+                <h:outputText id="valorAtualizado" value="#{controllerInvestimento.formataValor(controllerInvestimento.cdb.valorAtualizado)}"></h:outputText>
+                <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.calcularRendimentos(controllerInvestimento.cdb)}"></p:commandButton>
             </p:panelGrid>
         </h:form>
         <h3>

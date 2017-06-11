@@ -7,6 +7,8 @@ package br.com.simuladorinvestimentos.model.dao;
 
 import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.util.Message;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,7 +42,7 @@ public class DAOBancoMySql {
     }
 
     //Abressão conexão com o banco.
-    public SessionFactory abrirSession() throws ErroSistema {
+   public SessionFactory abrirSession() throws ErroSistema {
 
         SessionFactory factory = null;
         try {
@@ -56,7 +58,7 @@ public class DAOBancoMySql {
 
         return factory;
 
-    }
+}
 
     //Recupera a sesão aberta e inicia uma transação com o banco
     public static Session iniciarTransacao() throws ErroSistema {

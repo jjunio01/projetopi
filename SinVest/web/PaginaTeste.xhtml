@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>
+        <ui:insert name="title">
+            MyImage.com
+        </ui:insert>
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap-theme.min.css" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+    <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
+     
+    <script>
+        $a = jQuery.noConflict();
+        $a(document).ready(function() {
+            var heightWindow = $a(window).height();
+            var heightBody   = document.body.clientHeight;
+            if(heightWindow > heightBody){
+                $a("#footer").css('position', 'fixed');
+                $a("#footer").css('bottom', '0');
+            }                
+        });
+    </script>
+     
+</h:head>
+<h:body>
+    <div>
+        <ui:insert name="nav_bar">
+         
+        </ui:insert>
+    </div>
+     
+    <div class="container" >
+        <ui:insert name="container">
+         
+        </ui:insert>
+    </div>    
+    <div id="footer" style="padding-top:30px; margin-top:90px; width:100%; background-color: #EEEEEE;" role="footer">
+        <ui:insert name="nav_footer">
+            <ui:include src="footer.xhtml" />
+        </ui:insert>
+    </div>    
+</h:body>
+</html>

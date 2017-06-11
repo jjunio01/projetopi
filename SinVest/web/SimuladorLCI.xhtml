@@ -19,14 +19,14 @@ and open the template in the editor.
             <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/>
             <p:panelGrid columns="2"> 
                 <h:outputLabel for="valor" value="Valor"></h:outputLabel>
-                <h:inputText id="valor" value="#{controllerInvestimento.lci.valor}" ></h:inputText> 
+                <p:inputNumber placeholder="Valor" id="valor" value="#{controllerInvestimento.lci.valor}" /> 
                 <h:outputLabel for="periodo" value="Quantidade de dias úteis.   " />
-                <h:inputText id="periodo" value="#{controllerInvestimento.lci.periodo}"/>                 
+                <p:inputNumber placeholder="Período" id="periodo" value="#{controllerInvestimento.lci.periodo}"/>                 
                 <h:outputLabel for="rendimento" value="Rendimento"></h:outputLabel>
-                <h:outputText id="rendimento" value="#{controllerInvestimento.lci.rendimentos}"></h:outputText>
+                <h:outputText id="rendimento" value="#{controllerInvestimento.formataValor(controllerInvestimento.lci.rendimentos)}"></h:outputText>
                 <h:outputLabel for="valorAtualizado" value="Valor Atualizado"></h:outputLabel>
-                <h:outputText id="valorAtualizado" value="#{controllerInvestimento.lci.valorAtualizado}"></h:outputText>
-                <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.salvarLCI()}"></p:commandButton>
+                <h:outputText id="valorAtualizado" value="#{controllerInvestimento.formataValor(controllerInvestimento.lci.valorAtualizado)}"></h:outputText>
+                <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.calcularRendimentos(controllerInvestimento.lci)}"></p:commandButton>
             </p:panelGrid>
         </h:form>
         <h3>

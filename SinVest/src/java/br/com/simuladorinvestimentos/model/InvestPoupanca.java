@@ -23,9 +23,11 @@ public class InvestPoupanca extends Investimento {
 
     @Override
     public void calcularRendimentos() {
-        
-        this.setRendimentos((this.getValor() * Math.pow( 1 + getIndiceRendimento(),this.getPeriodo())) - this.getValor());
-                
+        //Calcula os juros mensais do valor, utilizando juros compostos.
+        if (super.getPeriodo() >= 30) {
+            this.setRendimentos((this.getValor() * Math.pow(
+                    1 + getIndiceRendimento(), periodo())) - this.getValor());
+        }
     }
 
     public double getTaxaTr() {
@@ -45,28 +47,45 @@ public class InvestPoupanca extends Investimento {
     }
 
     public double getTaxaAdicional() {
-        if (this.taxaSelic > 8.5) {
-            this.taxaAdicional = 0.0053;
-        }
+        setTaxaAdicional();
         return taxaAdicional;
     }
 
-    public void setTaxaAdicional(double taxaAdicional) {
-        this.taxaAdicional = taxaAdicional;
+    public void setTaxaAdicional() {
+        //Atualiza a taxa de rendimento adicinao de acordo com a Taxa Selic Vigente
+        if (this.taxaSelic > 8.5) {
+            this.taxaAdicional = 0.0053;
+        } else {
+            this.taxaAdicional = getTaxaSelic() * 0.7;
+        }
+    }
+
+    public int periodo() {
+        setPeriodo();
+        return super.getPeriodo();
+    }
+
+    public void setPeriodo() {
+
+        if (super.getPeriodo() < 30) {
+            this.setRendimentos(0);
+        } else if (super.getPeriodo() == 30) {
+            super.setPeriodo(1);
+        } else {
+            super.setPeriodo(super.getPeriodo() / 30);
+        }
     }
 
     @Override
     public double getIndiceRendimento() {
-        setIndiceRendimento( getTaxaAdicional() + this.taxaTr);
+        setIndiceRendimento(getTaxaAdicional() + this.taxaTr);
         return super.getIndiceRendimento();
     }
 
     @Override
-    public double getValorAtualizado() {        
+    public double getValorAtualizado() {
         setValorAtualizado(this.getValor() + this.getRendimentos());
         return super.getValorAtualizado();
     }
-
-    
 
 }

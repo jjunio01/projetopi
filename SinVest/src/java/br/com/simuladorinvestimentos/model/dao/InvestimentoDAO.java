@@ -9,14 +9,13 @@ import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.model.InvestCDB;
 import br.com.simuladorinvestimentos.model.InvestLCI;
 import br.com.simuladorinvestimentos.model.InvestPoupanca;
-import java.util.List;
 import org.hibernate.Session;
 
 /**
  *
  * @author Jose Junio
  */
-public class InvestimentoDAO implements DAOGenerico{
+public class InvestimentoDAO {
     
     
     private static InvestimentoDAO instance;
@@ -32,67 +31,26 @@ public class InvestimentoDAO implements DAOGenerico{
         return instance;
     }    
     
-
-    public void salvar(InvestPoupanca objeto) throws ErroSistema{
+    //Método para salvar uma Poupanca
+    public void salvar(InvestPoupanca poupanca) throws ErroSistema{
+        //Abre uma conexão com o banco e inicia uma trasação
         Session session = DAOBancoMySql.iniciarTransacao();
-        session.saveOrUpdate(objeto);
+        //Salva o objeto no banco de dados.
+        session.saveOrUpdate(poupanca);
+        //Recupera a sessão aberta encerra a transação e fecha a conexão;
         DAOBancoMySql.fecharTransacao(session);
     }
-    
-    public void atualizar(InvestPoupanca objeto) throws ErroSistema{
-        Session session = DAOBancoMySql.iniciarTransacao();
-        session.update(objeto);
-        DAOBancoMySql.fecharTransacao(session);
-    }
-    
-     public void salvar(InvestCDB cdb) throws ErroSistema{
+    //Método para salvar uma CDB
+    public void salvar(InvestCDB cdb) throws ErroSistema{
         Session session = DAOBancoMySql.iniciarTransacao();
         session.saveOrUpdate(cdb);
         DAOBancoMySql.fecharTransacao(session);
     }
-    
-    public void atualizar(InvestCDB cdb) throws ErroSistema{
-        Session session = DAOBancoMySql.iniciarTransacao();
-        session.update(cdb);
-        DAOBancoMySql.fecharTransacao(session);
-    }
-    
+    //Método para salvar uma LCI
     public void salvarLCI(InvestLCI lci) throws ErroSistema{
         Session session = DAOBancoMySql.iniciarTransacao();
         session.saveOrUpdate(lci);
         DAOBancoMySql.fecharTransacao(session);
     }
     
-    public void atualizar(InvestLCI lci) throws ErroSistema{
-        Session session = DAOBancoMySql.iniciarTransacao();
-        session.update(lci);
-        DAOBancoMySql.fecharTransacao(session);
-    }
-    
-    @Override
-    public void create(Object t) throws ErroSistema {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(Object t) throws ErroSistema {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object read(String c) throws ErroSistema {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(String txt) throws ErroSistema {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List readALL() throws ErroSistema {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-       
 }
