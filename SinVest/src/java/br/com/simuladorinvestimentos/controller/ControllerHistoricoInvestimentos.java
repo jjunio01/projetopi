@@ -5,9 +5,12 @@
  */
 package br.com.simuladorinvestimentos.controller;
 
+import br.com.simuladorinvestimentos.model.Cliente;
 import br.com.simuladorinvestimentos.model.HistoricoInvestimentos;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -17,18 +20,15 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ControllerHistoricoInvestimentos {
 
-    private HistoricoInvestimentos historico;
-    
 
     public ControllerHistoricoInvestimentos() {
     }
 
-    public HistoricoInvestimentos getHistorico() {
-        return historico;
-    }
-
-    public void setHistorico(HistoricoInvestimentos historico) {
-        this.historico = historico;
+    public List<HistoricoInvestimentos> recuperaHistorico() {
+        Cliente clienteLogado = (Cliente) FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap().get("user");
+        List<HistoricoInvestimentos> comparacoes = clienteLogado.getHistorico();
+        return comparacoes;
     }
 
 }
