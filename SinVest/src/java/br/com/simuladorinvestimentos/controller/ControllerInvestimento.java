@@ -34,7 +34,7 @@ public class ControllerInvestimento {
     private InvestimentoDAO investDao = InvestimentoDAO.getInstance();
     private int tipoPrazo;
     private List<Investimento> investimentos;
-    private List<HistoricoInvestimentos> hitorico;
+    private List<HistoricoInvestimentos> historicoInvestimento;
 
     public ControllerInvestimento() {
     }
@@ -91,16 +91,17 @@ public class ControllerInvestimento {
         investimentos.add(poupanca);
         investimentos.add(cdb);
         investimentos.add(lci);
-        /*Cliente clienteLogado = (Cliente) FacesContext.getCurrentInstance().
+        Cliente clienteLogado = (Cliente) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("user");
-        this.hitorico = new ArrayList<>();
-        hitorico = clienteLogado.getHistorico();
-        hitorico.iterator().next().setInvestimentos(investimentos);
-        hitorico.iterator().next().setDataAcesso(new Date());
-        clienteLogado.setHistorico(hitorico);
+        historicoInvestimento = new ArrayList<>();
+        HistoricoInvestimentos histInvestimento= new HistoricoInvestimentos();
+        histInvestimento.setDataAcesso(new Date());
+        histInvestimento.setInvestimentos(investimentos);
+        historicoInvestimento.add(histInvestimento);
+        clienteLogado.setHistorico(historicoInvestimento);
         ControllerCliente contCliente = new ControllerCliente();
         contCliente.setCliente(clienteLogado);
-        contCliente.alterar();*/
+        contCliente.alterar();
     }
 
     public InvestPoupanca getPoupanca() {
@@ -149,11 +150,11 @@ public class ControllerInvestimento {
     }
 
     public List<HistoricoInvestimentos> getHitorico() {
-        return hitorico;
+        return historicoInvestimento;
     }
 
     public void setHitorico(List<HistoricoInvestimentos> hitorico) {
-        this.hitorico = hitorico;
+        this.historicoInvestimento = hitorico;
     }
 
 }

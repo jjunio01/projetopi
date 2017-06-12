@@ -52,7 +52,7 @@ public class ControllerCliente {
                 usurioNovo.setSenha(Criptografia.criptografarSenha(clienteNovo.getUsuario().getSenha()));
                 clienteNovo.setUsuario(usurioNovo);
                 //Cria um histórico dos comparativos dos investimentos.
-                List<HistoricoInvestimentos> hitorico = new ArrayList<>(); 
+                List<HistoricoInvestimentos> hitorico = new ArrayList<>();
                 clienteNovo.setHistorico(hitorico);
                 //Salva o cliente no banco de dados.
                 ClienteDAO.getInstance().create(clienteNovo);
