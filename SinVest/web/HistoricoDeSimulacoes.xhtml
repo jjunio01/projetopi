@@ -6,6 +6,7 @@
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              xmlns:p="http://primefaces.org/ui"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
     <h:form>
         <p:dataTable  var="investimentos" value="#{controllerHistoricoInvestimentos.recuperaHistorico()}">  
             <p:column headerText="Data">
@@ -13,8 +14,11 @@
                     <f:convertDateTime timeZone="GMT-3" pattern="dd/MM/yyyy"></f:convertDateTime>
                 </h:outputText>
             </p:column>
+            <p:column headerText="Valor">
+                <h:outputText value="#{controllerHistoricoInvestimentos.investimento.valor}" />
+            </p:column>
             <p:column headerText="Período">
-                <h:outputText value="Teste" />
+                <h:outputText value="#{controllerHistoricoInvestimentos.investimento.periodo}" />
             </p:column>
         </p:dataTable>
     </h:form>
