@@ -20,10 +20,10 @@
                 <h:outputText value="#{clientes.email}" />
             </p:column>
             <p:column headerText="Data de Nascimento">
-                <h:outputText value="#{clientes.dataNasc}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                </h:outputText>                    
-            </p:column>
+            <h:outputText id="dataNasc" value="#{clientes.dataNasc}">
+                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+            </h:outputText>                 
+            </p:column>            
             <p:column headerText="Login">
                 <h:outputText value="#{clientes.usuario.login}"></h:outputText>
             </p:column>

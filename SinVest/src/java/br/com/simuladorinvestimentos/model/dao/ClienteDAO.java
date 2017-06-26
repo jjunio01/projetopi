@@ -2,7 +2,7 @@
 * To change this license header, choose License Headers in Project Properties.
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
-*/
+ */
 package br.com.simuladorinvestimentos.model.dao;
 
 import br.com.simuladorinvestimentos.model.Cliente;
@@ -66,7 +66,7 @@ public class ClienteDAO implements DAOGenerico<Cliente> {
         Session session = DAOBancoMySql.iniciarTransacao();
         Cliente cli = null;
         try {
-            /*/Faz consulta no banco de dados utilizando como parâmetro da consulta o 
+            /*Faz consulta no banco de dados utilizando como parâmetro da consulta o 
             CPF recebido pelo método, retornando uma lista de obejtos*/
             Query consulta = session.createQuery("from Cliente where cpf like '" + cpf + "'");
             //Resupera o primeiro e único elemento da consulta.
@@ -76,15 +76,14 @@ public class ClienteDAO implements DAOGenerico<Cliente> {
         } finally {
             DAOBancoMySql.fecharTransacao(session);
             return cli;
-        }
-
+        }        
     }
 
     public Usuario readLogin(String login) throws ErroSistema {
         Session session = DAOBancoMySql.iniciarTransacao();
         Usuario usuario = null;
-       try {
-            /*/Faz consulta no banco de dados utilizando como parâmetro da consulta o 
+        try {
+            /*Faz consulta no banco de dados utilizando como parâmetro da consulta o 
             Login recebido pelo método, retornando uma lista de obejtos*/
             Query consulta = session.createQuery("from Usuario where login like '" + login + "'");
             usuario = (Usuario) consulta.list().get(0);
@@ -101,7 +100,7 @@ public class ClienteDAO implements DAOGenerico<Cliente> {
         Session session = DAOBancoMySql.iniciarTransacao();
         Cliente cliente = null;
         try {
-            /*/Faz consulta no banco de dados utilizando como parâmetro da consulta o 
+            /*Faz consulta no banco de dados utilizando como parâmetro da consulta o 
             Login recebido pelo método, retornando uma lista de obejtos*/
             Query consulta = session.createQuery(" from Cliente as cli where cli.usuario.login like'" + login + "'");
             cliente = (Cliente) consulta.list().get(0);
@@ -118,7 +117,7 @@ public class ClienteDAO implements DAOGenerico<Cliente> {
         Session session = DAOBancoMySql.iniciarTransacao();
         Cliente cli = null;
         try {
-            /*/Faz consulta no banco de dados utilizando como parâmetro da consulta o 
+            /*Faz consulta no banco de dados utilizando como parâmetro da consulta o 
             CPF recebido pelo método, retornando uma lista de obejtos*/
             Query consulta = session.createQuery("from Cliente where cpf like '" + cpf + "'");
             cli = (Cliente) consulta.list().get(0);

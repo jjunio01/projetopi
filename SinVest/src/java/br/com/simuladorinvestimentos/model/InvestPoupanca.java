@@ -14,8 +14,8 @@ import javax.persistence.Entity;
 @Entity
 public class InvestPoupanca extends Investimento {
 
-    private double taxaTr = 0.0001069;
-    private double taxaSelic = 11.25;
+    private double taxaTr = 0.0000903;
+    private double taxaSelic = 10.15;
     private double taxaAdicional;
 
     public InvestPoupanca() {
@@ -52,7 +52,7 @@ public class InvestPoupanca extends Investimento {
     }
 
     public void setTaxaAdicional() {
-        //Atualiza a taxa de rendimento adicinao de acordo com a Taxa Selic Vigente
+        //Atualiza a taxa de rendimento adicional de acordo com a Taxa Selic Vigente
         if (this.taxaSelic > 8.5) {
             this.taxaAdicional = 0.0053;
         } else {
@@ -66,7 +66,8 @@ public class InvestPoupanca extends Investimento {
     }
 
     public void setPeriodo() {
-
+        //Atualiza o período de forma que os rendimentos sejam calculados 
+        //a cada 30 dias.
         if (super.getPeriodo() < 30) {
             this.setRendimentos(0);
         } else if (super.getPeriodo() == 30) {
@@ -78,6 +79,8 @@ public class InvestPoupanca extends Investimento {
 
     @Override
     public double getIndiceRendimento() {
+        //Retorna o índice de rendimento que é formado por:
+        //Taxa TR e pela taxa adicional que é calulado de acordo com a SELIC
         setIndiceRendimento(getTaxaAdicional() + this.taxaTr);
         return super.getIndiceRendimento();
     }

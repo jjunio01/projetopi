@@ -1,12 +1,13 @@
 package br.com.simuladorinvestimentos.model;
 
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -31,8 +32,8 @@ public class Cliente implements Serializable {
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<HistoricoInvestimentos> historico;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Investimento> listaInvestimentos;
 
     public Cliente(String nome, String cpf, Date dataNasc, String email, Usuario usuario) {
         this.nome = nome;
@@ -43,7 +44,9 @@ public class Cliente implements Serializable {
     }
 
     public Cliente() {
-            usuario = new Usuario();
+        usuario = new Usuario();
+        List<Investimento> lista = new ArrayList<>();
+        this.setListaInvestimentos(lista);
     }
 
     public Integer getId() {
@@ -90,13 +93,12 @@ public class Cliente implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<HistoricoInvestimentos> getHistorico() {
-        return historico;
+    public List<Investimento> getListaInvestimentos() {
+        return listaInvestimentos;
     }
 
-    public void setHistorico(List<HistoricoInvestimentos> historico) {
-        this.historico = historico;
+    public void setListaInvestimentos(List<Investimento> listaInvestimentos) {
+        this.listaInvestimentos = listaInvestimentos;
     }
 
-    
 }

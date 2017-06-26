@@ -10,8 +10,7 @@ and open the template in the editor.
              template="index.xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:p="http://primefaces.org/ui"
-             xmlns:f="http://xmlns.jcp.org/jsf/core"
-             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">   
+             xmlns:f="http://xmlns.jcp.org/jsf/core">   
 
     <h:form>
         <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/>
@@ -19,30 +18,27 @@ and open the template in the editor.
             <h:outputLabel for="valor" value="Valor"></h:outputLabel>
             <p:inputNumber placeholder="Valor" minValue="0" required="true" requiredMessage="Valor deve ser maior que 0." id="valor" value="#{valor}" /> 
             <h:outputLabel for="prazo" value="Período" />
-            <p:inputNumber placeholder="Peíodo entre 1 e 30" minValue="1" maxlength="4" maxValue="30" id="prazo" value="#{periodo}"/> 
+            <p:inputNumber placeholder="Período entre 1 e 30" minValue="0" id="prazo" value="#{periodo}"/> 
             <p:commandButton update="@form" value="Efetuar Comparação" action="#{controllerInvestimento.compararInvestimentos(periodo, valor)}"></p:commandButton>
             <h:selectOneRadio required="true" requiredMessage="Selecione o tipo de Prazo" label="Prazo" value="#{controllerInvestimento.tipoPrazo}">
                 <f:selectItem itemLabel="Dia" itemValue="1"></f:selectItem>
                 <f:selectItem itemLabel="Mês" itemValue="30"></f:selectItem>
                 <f:selectItem itemLabel="Ano" itemValue="360"></f:selectItem>
             </h:selectOneRadio>
-        </p:panelGrid>
-        <c:if test="#{controllerInvestimento.investimentos != null}">
-            <p:dataTable  var="investimentos" value="#{controllerInvestimento.investimentos}">  
-                <p:column headerText="Valor">
-                    <h:outputText value="#{investimentos.valor}"/>
-                </p:column>
-                <p:column headerText="Período">
-                    <h:outputText value="#{investimentos.periodo}" />
-                </p:column>
-                <p:column headerText="Rendimento Bruto">
-                    <h:outputText value="#{controllerInvestimento.formataValor(investimentos.rendimentos)}" />
-                </p:column>
-                <p:column headerText="Valor Atualizado">
-                    <h:outputText value="#{controllerInvestimento.formataValor(investimentos.valorAtualizado)}" />
-                </p:column>
-
-            </p:dataTable>
-        </c:if>
+        </p:panelGrid>        
+        <p:dataTable rendered="#{not empty controllerInvestimento.listaInvestimentos}" var="investimentos" value="#{controllerInvestimento.listaInvestimentos}">                
+            <p:column  headerText="Tipo">
+                <h:outputText  value="#{investimentos.tipo}"></h:outputText>
+            </p:column>
+            <p:column headerText="Valor">
+                <h:outputText value="#{investimentos.valor}" />
+            </p:column>           
+            <p:column headerText="Rendimento Bruto">
+                <h:outputText value="#{controllerInvestimento.formataValor(investimentos.rendimentos)}" />
+            </p:column>
+            <p:column headerText="Valor Atualizado">
+                <h:outputText value="#{controllerInvestimento.formataValor(investimentos.valorAtualizado)}" />
+            </p:column>
+        </p:dataTable>       
     </h:form>
 </ui:decorate>

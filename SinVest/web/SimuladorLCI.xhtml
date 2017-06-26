@@ -19,18 +19,21 @@ and open the template in the editor.
             <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/>
             <p:panelGrid columns="2"> 
                 <h:outputLabel for="valor" value="Valor"></h:outputLabel>
-                <p:inputNumber placeholder="Valor" id="valor" value="#{controllerInvestimento.lci.valor}" /> 
-                <h:outputLabel for="periodo" value="Quantidade de dias úteis.   " />
-                <p:inputNumber placeholder="Período" id="periodo" value="#{controllerInvestimento.lci.periodo}"/>                 
+                <p:inputNumber placeholder="Valor" id="valor" minValue="0" value="#{controllerInvestimento.lci.valor}" /> 
+                <h:outputLabel for="periodo" value="Quantidade de dias." />
+                <p:inputNumber placeholder="Período" minValue="0" id="periodo" value="#{controllerInvestimento.lci.periodo}"/>                 
                 <h:outputLabel for="rendimento" value="Rendimento"></h:outputLabel>
-                <h:outputText id="rendimento" value="#{controllerInvestimento.formataValor(controllerInvestimento.lci.rendimentos)}"></h:outputText>
+                <h:outputText id="rendimento" value="R$#{controllerInvestimento.formataValor(controllerInvestimento.lci.rendimentos)}"></h:outputText>
                 <h:outputLabel for="valorAtualizado" value="Valor Atualizado"></h:outputLabel>
-                <h:outputText id="valorAtualizado" value="#{controllerInvestimento.formataValor(controllerInvestimento.lci.valorAtualizado)}"></h:outputText>
+                <h:outputText id="valorAtualizado" value="R$#{controllerInvestimento.formataValor(controllerInvestimento.lci.valorAtualizado)}"></h:outputText>
                 <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.calcularRendimentos(controllerInvestimento.lci)}"></p:commandButton>
             </p:panelGrid>
         </h:form>
-        <h3>
-            Valores baseados em estimativas e não são garantias de rentabilidade futura.
-        </h3>
+        <p:separator></p:separator>
     </center>
+    <p:panel>
+        Valores baseados em estimativas e não são garantias de rentabilidade futura.<br></br>
+        IR: Não incidência sobre o rendimento.<br></br>
+        Obs.: Para o cálculo do rendimento foi utilizado o percentual de 80% do CDI.
+    </p:panel>
 </ui:decorate>

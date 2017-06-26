@@ -16,8 +16,8 @@ import javax.persistence.Entity;
 @Entity
 public class InvestLCI extends Investimento {
 
-    private final double cdi = 11.13;
-    private double percentCDI = 90;
+    private final double cdi = 10.14;
+    private double percentCDI = 80;
 
     public InvestLCI() {
     }
@@ -28,13 +28,14 @@ public class InvestLCI extends Investimento {
         if (getPeriodo() < 90) {
             Message.getInstance().adicionarMensagem(
                     null, "Período para o LCI deve ser igual ou superior a 90 dias", FacesMessage.SEVERITY_WARN);
+            this.setValorAtualizado(getValor() + getRendimentos());
             return;
         }
-        
+
         for (int i = 0; i < this.getPeriodo(); i++) {
             setIndiceRendimento(1);
             //Calcula o índice de rendimento capitalizados ao dia
-            setIndiceRendimento(getIndiceRendimento() * Math.pow((Math.pow(((getCdi() / 100) + 1), 0.003968254)), this.getPeriodo())); 
+            setIndiceRendimento(getIndiceRendimento() * Math.pow((Math.pow(((getCdi() / 100) + 1), 0.003968254)), this.getPeriodo()));
         }
         //Atualiza o valor dos rendimentos;
         this.setRendimentos(((getIndiceRendimento() - 1) * this.getValor()));

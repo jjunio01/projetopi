@@ -7,29 +7,28 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
+    <p:growl showDetail="true" showSummary="false" autoUpdate="true" life="4000" ></p:growl>
     <p:separator/>
     <center>
         <h:form>
-            <p:messages autoUpdate="true" showDetail="true"></p:messages>
             <h2>Simulador da Poupança</h2>
             <p:panelGrid columns="2"> 
                 <h:outputLabel for="valor" value="Valor Inicial"></h:outputLabel>
-                <h:inputText id="valor"  value="#{controllerInvestimento.poupanca.valor}" required="true" requiredMessage="Valor é uma informação obrigatória">
-                </h:inputText>                   
+                <p:inputNumber placeholder="Valor" id="valor" minValue="0" symbol="R$" value="#{controllerInvestimento.poupanca.valor}" required="true" 
+                               requiredMessage="Valor é uma informação obrigatória"/>                 
                 <h:outputLabel for="periodo" value="Quantidade de meses:" />
-                <h:inputText id="periodo" value="#{periodo}" required="true" requiredMessage="Quantidade de meses é uma informação obrigatória"/> 
+                <p:inputNumber placeholder="Período" minValue="0" id="periodo" value="#{periodo}" required="true" requiredMessage="Quantidade de meses é uma informação obrigatória"/> 
                 <h:outputLabel for="rendimentoLiquido" value="Rendimento Líquido"></h:outputLabel>
-                <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.formataValor(controllerInvestimento.poupanca.rendimentos)}">
+                <h:outputText id="rendimentoLiquido" value="R$#{controllerInvestimento.formataValor(controllerInvestimento.poupanca.rendimentos)}">
                 </h:outputText>
                 <h:outputLabel for="valorFinal" value="Valor Atualizado"></h:outputLabel>
-                <h:outputText id="valorFinal" value="#{controllerInvestimento.formataValor(controllerInvestimento.poupanca.valorAtualizado)}"></h:outputText>
+                <h:outputText id="valorFinal" value="R$#{controllerInvestimento.formataValor(controllerInvestimento.poupanca.valorAtualizado)}"></h:outputText>
                 <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.calcularRendimentos(periodo)}"></p:commandButton>
             </p:panelGrid>
-        </h:form>
-        <h3>
-            Valores baseados em estimativas e não são garantias de rentabilidade futura.
-        </h3>
-    </center>
+        </h:form> 
+        <p:separator/>
+        Valores baseados em estimativas e não são garantias de rentabilidade futura.<br></br>
+        Não a cobrança de IOF e nem incidência de IR.
+          </center>
 </ui:decorate>
 

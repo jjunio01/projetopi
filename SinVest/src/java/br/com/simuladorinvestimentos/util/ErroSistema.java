@@ -5,8 +5,6 @@
  */
 package br.com.simuladorinvestimentos.util;
 
-import javax.faces.application.FacesMessage;
-
 /**
  *
  * @author Jose Junio
@@ -14,8 +12,7 @@ import javax.faces.application.FacesMessage;
 public class ErroSistema extends Exception {
 
     public ErroSistema(String message) {
-        super(message);
-        
+        super(message);        
     }
 
     public ErroSistema(String message, Throwable cause) {

@@ -24,20 +24,32 @@
                     <f:selectItem itemLabel="2 anos" itemValue="504"/>
                     <f:selectItem itemLabel="3 anos" itemValue="756"/>
                 </h:selectOneMenu>
-                <h:outputLabel for="percentCDI" value="Percentual do CDI.  Ex. 80%"></h:outputLabel>
-                <h:inputText id="percentCDI" value="#{controllerInvestimento.cdb.percentCDI}"></h:inputText>
+                <h:outputLabel for="percentCDI" value="Percentual do CDI.  Ex. 90%"></h:outputLabel>
+                <p:inputNumber id="percentCDI" value="#{controllerInvestimento.cdb.percentCDI}"/>
                 <h:outputLabel for="rendimento" value="Rendimento Bruto"></h:outputLabel>
-                <h:outputText id="rendimento" value="#{controllerInvestimento.formataValor(controllerInvestimento.cdb.rendimentos)}"></h:outputText>
+                <h:outputText id="rendimento" value="R$#{controllerInvestimento.formataValor(controllerInvestimento.cdb.rendimentos)}"></h:outputText>
+                <h:outputLabel for="iof" value="IOF"></h:outputLabel>
+                <h:outputText id="iof" value="R$#{controllerInvestimento.cdb.iof}"/>
+                <h:outputLabel for="ir" value="IR"></h:outputLabel>
+                <h:outputText id="ir" value="#{controllerInvestimento.cdb.taxaIR * 100} %"/>
                 <h:outputLabel for="rendimentoLiquido" value="Rendimento Líquido"></h:outputLabel>
-                <h:outputText id="rendimentoLiquido" value="#{controllerInvestimento.formataValor(controllerInvestimento.cdb.rendimentoLiquido)}"></h:outputText>
+                <h:outputText id="rendimentoLiquido" value="R$#{controllerInvestimento.formataValor(controllerInvestimento.cdb.rendimentoLiquido)}"></h:outputText>
                 <h:outputLabel for="valorAtualizado" value="Valor Atualizado"></h:outputLabel>
-                <h:outputText id="valorAtualizado" value="#{controllerInvestimento.formataValor(controllerInvestimento.cdb.valorAtualizado)}"></h:outputText>
+                <h:outputText id="valorAtualizado" value="R$#{controllerInvestimento.formataValor(controllerInvestimento.cdb.valorAtualizado)}"></h:outputText>
                 <p:commandButton update="@form" value="Calcular Rendimentos" action="#{controllerInvestimento.calcularRendimentos(controllerInvestimento.cdb)}"></p:commandButton>
             </p:panelGrid>
         </h:form>
-        <h3>
-            Valores baseados em estimativas e não são garantias de rentabilidade futura.
-        </h3>
+        <p:separator></p:separator>
     </center>
+    <p:panel>
+        Valores baseados em estimativas e não são garantias de rentabilidade futura.<br></br>
+        IOF será cobrado em caso de resgate antes de 30 dias da aplicação.<br></br>
+        IR:  Tempo de permanência 	<br></br>
+        Alíquota<br></br>
+        Até 180 dias                     22,5%<br></br>
+        De 181 a 360 dias                20%<br></br>
+        De 361 a 720 dias                17,5%<br></br>
+        Acima de 720 dias                15%
+    </p:panel>
 </ui:decorate>
 

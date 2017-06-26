@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 public class InvestCDB extends Investimento {
 
     private double taxaIR;
-    private final double cdi = 11.13;
+    private final double cdi = 10.14;
     private double percentCDI = 90;
     private double rendimentoLiquido;
     private double iof;
@@ -29,8 +29,8 @@ public class InvestCDB extends Investimento {
         for (int i = 0; i < this.getPeriodo(); i++) {
             setIndiceRendimento(1);
             //Calcula o índice de rendimento capitalizados ao dia.
-            setIndiceRendimento(getIndiceRendimento() * Math.pow((Math.pow(((getCdi() / 100) + 1), 0.003968254)), this.getPeriodo()));
-
+            setIndiceRendimento(getIndiceRendimento() * Math.pow((Math.pow(((getCdi() / 100) + 1),
+                    0.003968254)), this.getPeriodo()));
         }
         //Atualiza o valor dos rendimentos.
         this.setRendimentos(((getIndiceRendimento() - 1) * this.getValor()));
@@ -41,6 +41,7 @@ public class InvestCDB extends Investimento {
     }
 
     public double getTaxaIR() {
+        setTaxaIR();
         return taxaIR;
     }
 

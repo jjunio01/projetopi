@@ -7,8 +7,6 @@ package br.com.simuladorinvestimentos.model.dao;
 
 import br.com.simuladorinvestimentos.util.ErroSistema;
 import br.com.simuladorinvestimentos.util.Message;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +39,7 @@ public class DAOBancoMySql {
         return instance;
     }
 
-    //Abressão conexão com o banco.
+    //Abre sessão para conexão com o banco.
    public SessionFactory abrirSession() throws ErroSistema {
 
         SessionFactory factory = null;
@@ -53,14 +51,11 @@ public class DAOBancoMySql {
                     null, "Não foi possível abrir a conexão com o banco de dados", FacesMessage.SEVERITY_INFO);
             throw new ErroSistema(
                     "Não foi possível abrir a conexão com o banco de dados", erroAbrirSession);
-
         }
-
         return factory;
-
 }
 
-    //Recupera a sesão aberta e inicia uma transação com o banco
+   //Inicia uma transação com o banco
     public static Session iniciarTransacao() throws ErroSistema {
         //Abre uma sessão de conexão com o banco
         Session session = getInstance().abrirSession().openSession();
@@ -81,7 +76,7 @@ public class DAOBancoMySql {
     public static void fecharTransacao(Session session) throws ErroSistema {
 
         try {
-            //Encerra a transação da sessão recuperada
+            //Encerra a transação da sessão recuperada e efetua commit
             session.getTransaction().commit();
         } catch (NullPointerException erroFecharTransacao) {
             erroFecharTransacao.printStackTrace();

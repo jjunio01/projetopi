@@ -6,9 +6,12 @@
 package br.com.simuladorinvestimentos.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,17 +28,20 @@ public abstract class Investimento implements Serializable {
     private double rendimentos;
     private double indiceRendimento;
     private double valorAtualizado;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAcesso;
+    private String tipo;
 
     public Investimento() {
-        
-    }
 
+    }
+    
     public abstract void calcularRendimentos();
 
     public Integer getId() {
         return id;
     }
-    
+
     public double getValor() {
         return valor;
     }
@@ -77,6 +83,20 @@ public abstract class Investimento implements Serializable {
         this.valorAtualizado = valorAtualizado;
     }
 
-    
+    public Date getDataAcesso() {
+        return dataAcesso;
+    }
+
+    public void setDataAcesso(Date dataAcesso) {
+        this.dataAcesso = dataAcesso;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
 }

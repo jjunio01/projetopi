@@ -7,35 +7,22 @@
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              template="index.xhtml">
 
-        <h2>Alteração de Cadastro</h2>
-        <h:form>           
-            <p:menubar>
-                <p:menuitem value="Início" action="index.xhtml">                    
-                </p:menuitem>
-            </p:menubar>
-
-            <p:panelGrid columns="3">
-                <h:outputLabel for='c' value="CPF:"></h:outputLabel>
-                <p:inputMask  id= 'c' mask='999.999.999-99' value="#{cpf}">
-                </p:inputMask>
-                <p:commandButton  id="cliente" value="Buscar" update="@form" 
-                                  action="#{controllerCliente.consultar(cpf)}" ></p:commandButton>    
-            </p:panelGrid>
-            <p:messages autoUpdate="true" showDetail="true"></p:messages>
-            <br></br>      
-            <p:panelGrid columns="2" id="coluna">
-                <h:outputLabel for='nome' value="Nome:"></h:outputLabel>
-                <h:inputText id="nome" value="#{controllerCliente.cliente.nome}"></h:inputText>
-                <h:outputLabel value="CPF:"></h:outputLabel>
-                <h:outputText value="#{controllerCliente.cliente.cpf}"></h:outputText>
-                <h:outputLabel for='email' value="E-mail:"></h:outputLabel>
-                <h:inputText id='email' value="#{controllerCliente.cliente.email}"></h:inputText>
-                <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
-                <p:inputMask id="dataNasc" mask="99/99/9999" value="#{controllerCliente.cliente.dataNasc}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </p:inputMask>
-                <p:commandButton icon="ui-icon-arrowrefresh-1-w" value="Salvar" action="#{controllerCliente.alterar()}" update="@form"></p:commandButton>
-            </p:panelGrid> 
-        </h:form>        
+    <h2>Alteração de Dados Cadastrais</h2>
+    <h:form>    
+        <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/>    
+        <p:panelGrid columns="2" id="coluna">
+            <h:outputLabel for='nome' value="Nome:"></h:outputLabel>
+            <h:inputText id="nome" value="#{controllerLogin.clienteLogado.nome}"></h:inputText>
+            <h:outputLabel value="CPF:"></h:outputLabel>
+            <h:inputText disabled="true" value="#{controllerLogin.clienteLogado.cpf}"/>
+            <h:outputLabel for='email' value="E-mail:"></h:outputLabel>
+            <h:inputText id='email' value="#{controllerLogin.clienteLogado.email}"></h:inputText>
+            <h:outputLabel for='dataNasc' value="Data de Nascimento:"></h:outputLabel>
+            <p:inputMask id="dataNasc" mask="99/99/9999" value="#{controllerLogin.clienteLogado.dataNasc}">
+                <f:convertDateTime pattern="dd/MM/yyyy"/>
+            </p:inputMask>
+            <p:commandButton icon="ui-icon-arrowrefresh-1-w" value="Salvar" action="#{controllerCliente.alterar(controllerLogin.clienteLogado)}" update="@form"></p:commandButton>
+        </p:panelGrid> 
+    </h:form>        
 </ui:decorate>
 

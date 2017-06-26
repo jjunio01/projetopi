@@ -52,7 +52,7 @@ public class ControllerLogin {
 
     public String logout() {
         //Retira o cliente da sessão.
-        this.clienteLogado = null;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "Login.xhtml";
     }
 

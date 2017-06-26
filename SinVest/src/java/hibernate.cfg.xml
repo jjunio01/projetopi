@@ -40,21 +40,19 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sinvest?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password"/>
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.format_sql">true</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="br.com.simuladorinvestimentos.model.Cliente"/>
-    <mapping class="br.com.simuladorinvestimentos.model.Usuario"/>
-    <mapping class="br.com.simuladorinvestimentos.model.InvestLCI"/>
-    <mapping class="br.com.simuladorinvestimentos.model.InvestPoupanca"/>
-    <mapping class="br.com.simuladorinvestimentos.model.InvestCDB"/>
-    <mapping class="br.com.simuladorinvestimentos.model.HistoricoInvestimentos"/>
-    
-  </session-factory>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/simulador?zeroDateTimeBehavior=convertToNull</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"/>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping class="br.com.simuladorinvestimentos.model.Cliente"/>
+        <mapping class="br.com.simuladorinvestimentos.model.Usuario"/>
+        <mapping class="br.com.simuladorinvestimentos.model.InvestLCI"/>
+        <mapping class="br.com.simuladorinvestimentos.model.InvestPoupanca"/>
+        <mapping class="br.com.simuladorinvestimentos.model.InvestCDB"/>    
+    </session-factory>
 </hibernate-configuration>

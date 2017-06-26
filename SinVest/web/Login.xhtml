@@ -7,10 +7,11 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-       
+
     </h:head>
-    <h:body style= "background-image: url('#{resource['imagem.pn']}')">
-        
+    <h:body  style= "background-image: url('#{resource['teste.jp']}');background-repeat: no-repeat; background-position: center;
+             background-size: 100% 100%; background-position-x: auto">
+
         <c:if test="#{controllerLogin.clienteLogado != null}">
             <script>
                 location.href = "index.xhtml?faces-redirect=true";
@@ -22,9 +23,7 @@
                     <h:graphicImage  library="resources" name="logo.jpe" width="100px"></h:graphicImage>
                     <h1>Simulador de Investimentos</h1>   
                 </p:panelGrid>
-                <p:separator/>
-                <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/>  
-                <p:separator/>
+                <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/>  <br></br>
                 <p:panelGrid columns="2"  > 
                     <h:outputLabel for="login" value="Login"></h:outputLabel>
                     <h:inputText id="login" value="#{login}" required="true" requiredMessage="O login é Obrigatório."></h:inputText>                   
@@ -34,10 +33,12 @@
                     <p:commandButton  update="@form" value="Efetuar Login"
                                       action="#{controllerLogin.validaLogin(login,senha)}"></p:commandButton>  
                     <p:button value="Cadastre-se" href="CadastroCliente.xhtml"></p:button>
-                </p:panelGrid>
-
-
+                </p:panelGrid>                
             </h:form>
+            <br></br> <br></br> <br></br> 
+            <br></br> <br></br> <br></br> <br></br> <br></br> 
+            <br></br> <br></br> <br></br> <br></br> <br></br> 
+            <br></br> <br></br> <br></br> <br></br> <br></br>
         </center>
     </h:body>
 </html>

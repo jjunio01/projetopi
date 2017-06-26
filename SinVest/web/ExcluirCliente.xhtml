@@ -6,20 +6,23 @@
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              template="index.xhtml">
 
-    <h2>Exclusão de Cliente</h2>
-    <h:form>           
-        <p:menubar>
-            <p:menuitem value="Início" action="index">                    
-            </p:menuitem>
-        </p:menubar>
+    <h2>Exclusão do Cadastro</h2>
+    <h:form id="excluir">           
         <p:messages autoUpdate="true" showDetail="true"></p:messages>
         <p:panelGrid columns="3">
-            <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
-            <p:inputMask id= 'cpf' mask='999.999.999-99' value="#{controllerCliente.cliente.cpf}">
+            <h:outputLabel for='cpf' value="Digite seu CPF:"></h:outputLabel>
+            <p:inputMask id= 'cpf' mask='999.999.999-99' required="true" requiredMessage="Digite seu CPF." value="#{controllerCliente.cliente.cpf}">
             </p:inputMask>
-            <p:commandButton icon="ui-icon-close"  id="cliente" value="Excluir" update="@form" 
-                              action="#{controllerCliente.excluir()}" ></p:commandButton>                  
+            <p:commandButton  icon="ui-icon-search" oncomplete="PF('widExcluirCadastro').show()"
+                             update=":excluir:excluirCadastro" ></p:commandButton>                  
         </p:panelGrid>
+        <p:dialog header="Realmente Deseja exluir seu cadastro?" id="excluirCadastro" resizable="false" modal="true" visible="false" draggable="false"
+                  widgetVar="widExcluirCadastro">            
+            <p:button icon="ui-icon-close"  value="Não"/>
+            <p:commandButton icon="ui-icon-close"  id="cliente" value="Sim" update="@form" 
+                             action="#{controllerCliente.excluir()}" ></p:commandButton> 
+
+        </p:dialog>
     </h:form>        
 </ui:decorate>
 

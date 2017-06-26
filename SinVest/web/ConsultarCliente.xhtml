@@ -7,40 +7,20 @@
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              template="index.xhtml">
 
-    <h2>Consultar Cadastro</h2>
-    <h:form >           
-        <p:menubar>
-            <p:menuitem value="Início" url="index.xhtml" update="@form">                    
-            </p:menuitem>
-        </p:menubar>
-        <p:messages autoUpdate="true" showDetail="true"></p:messages>
-        <p:panelGrid columns="3">
-            <h:outputLabel for='cpf' value="CPF:"></h:outputLabel>
-            <p:inputMask  placeholder="CPF" id= 'cpf' mask='999.999.999-99' value="#{cpf}">
-            </p:inputMask>
-            <p:commandButton id="cliente" value="Buscar" update="@form" 
-                             action="#{controllerCliente.consultar(cpf)}">
-            </p:commandButton>                 
-        </p:panelGrid>
-        <p:dataTable id="consula" widgetVar="tab" value="#{controllerCliente.cliente}" >
-            <p:column headerText="Nome">
-                <h:outputText value="#{controllerCliente.cliente.nome}"></h:outputText>
-            </p:column>
-            <p:column headerText="CPF">
-                <h:outputText value="#{controllerCliente.cliente.cpf}"></h:outputText>
-            </p:column>
-            <p:column headerText="E-mail">
-                <h:outputText value="#{controllerCliente.cliente.email}" />
-            </p:column>
-            <p:column headerText="Data de Nascimento">
-                <h:outputText value="#{controllerCliente.cliente.dataNasc}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                </h:outputText>
-            </p:column>
-            <p:column headerText="Login">
-                <h:outputText value="#{controllerCliente.cliente.usuario.login}"></h:outputText>
-            </p:column>
-        </p:dataTable>
-    </h:form>        
+    <h2>Consultar Dados Cadastrais</h2>
+    <p:panelGrid columns="2"> 
+        <h:outputLabel for="nome" value="Nome:"></h:outputLabel>
+        <h:outputText id="nome" value="#{controllerLogin.clienteLogado.nome}" /> 
+        <h:outputLabel for="cpf" value="CPF:" />
+        <h:outputText value="#{controllerLogin.clienteLogado.cpf}"/> 
+        <h:outputLabel for="email" value="E-mail:" />
+        <h:outputText value="#{controllerLogin.clienteLogado.email}"/>
+        <h:outputLabel for="dataNasc" value="Data de Nascimento:" />
+        <h:outputText id="dataNasc" value="#{controllerLogin.clienteLogado.dataNasc}">
+            <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+        </h:outputText> 
+        <h:outputLabel for="login" value="Login:" />
+        <h:outputText id="login" value="#{controllerLogin.clienteLogado.usuario.login}"/>
+    </p:panelGrid>    
 </ui:decorate>
 
