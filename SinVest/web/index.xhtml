@@ -9,11 +9,11 @@
         <title>Simulador de Investimentos</title>
     </h:head>
 
-    <h:body style= "background-image: url('#{resource['teste.jg']}');background-repeat: no-repeat;
-            background-position: center;">        
+    <h:body style= "background-image: url('#{resource['agora.']}')
+            ">        
         <c:if test="#{controllerLogin.clienteLogado == null}">
             <script>
-                location.href = "Login.xhtml?faces-redirect=true";
+                location.href = "Login.xhtml";
             </script>
         </c:if>
         <p:panelGrid columns="2">
@@ -43,6 +43,7 @@
             <p:growl id="growl" life="4000" showDetail="true" showSummary="false"/> 
         </h:form>
         <ui:insert></ui:insert>
+        <br></br> <br></br>
     </h:body>
 </html>
 
